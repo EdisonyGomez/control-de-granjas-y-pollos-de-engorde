@@ -1,0 +1,37 @@
+<div class="flex-container">
+    <div class="card">
+            <div class="header text-white" style="text-align: center;">
+                <h1 >Lista de visitantes</h1>
+            </div>
+            <div class="table-container">
+                <table class="table table-responsive-md table-sm table-hover">
+                    <tbody>
+                        <tr>
+                            <td>Nombre</td>
+                            <td>Apellido</td>
+                            <td>Documento</td>
+                            <td>Ación</td>
+                        </tr>
+                        <tr *ngFor="let visitante of visitanteList|paginate: { itemsPerPage: 4, currentPage: page }">
+                            <td>{{visitante.nombre}}</td>
+                            <td>{{visitante.apellido}}</td>
+                            <td>{{visitante.documento}}</td>
+                            <td>
+                                <a class="btn btn-sm btn-secondary" (click)="onEdit(visitante)" >
+                                    <i class="far fa-edit"></i>    editar
+                                </a>
+                                <a class="btn btn-sm btn-danger" (click)="onDelete(visitante.$key)">
+                                    <i class="far fa-trash-alt"></i>    eliminar
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls 
+                                    (pageChange)="page = $event"
+                                    previousLabel="Anterior"
+                                    nextLabel="Siguiente">
+            </pagination-controls>
+        </div>
+        </div>
+</div>

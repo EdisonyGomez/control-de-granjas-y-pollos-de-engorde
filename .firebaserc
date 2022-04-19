@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "angula-firebase-1f43d"
+  },
+  "targets": {
+    "angula-firebase-1f43d": {
+      "hosting": {
+        "proyecto_grado": [
+          "angula-firebase-1f43d"
+        ]
+      }
+    }
+  }
+}

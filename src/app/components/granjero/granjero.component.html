@@ -1,0 +1,69 @@
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+<!-- INICIO DEL BODY -->
+
+<body id="body">
+
+    <header>
+        <!-- <div class="row"> -->
+            <div class="col-sm-3 icon__menu">
+                <i class="fas fa-bars" id="btn_open"></i>
+            </div>
+            <div class="col-sm-4 titulo" id="finca">
+                <h1>Finca San Pablo</h1><br>
+            </div>
+            <div class="col-sm-2">
+            <!-- CERRAR SESION -->
+            <span class="cerrar-sesion" style="float: right; cursor:pointer;" (click)="autenticacionService.SignOut()">
+                <i class="fas fa-sign-out-alt"></i>cerrar sesión
+            </span>
+            </div>                
+        <!-- </div> -->
+    </header>
+    <!-- BARRA LATERAL -->
+    <div class="menu__side" id="menu_side">
+        <div class="name__page">
+            <img src="assets/img/icons/ufps.png" alt="">
+        </div>
+    
+        <div class="options__menu">
+                <!-- ITEMS DE LA BARRA LATERAL -->
+            <a class="button selected" routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}" routerLink="/granjero">
+                <div class="option">
+                    <i class="fas fa-home" title="Inicio"></i>
+                    <h4>Inicio</h4>
+                </div>
+            </a>
+
+            <a class="button" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="ingreso"  >
+                <div class="option">
+                    <i class="fas fa-car" title="Visitantes"></i>
+                    <h4>Contról de ingreso</h4>
+                </div>
+            </a>
+
+            <a class="button" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="admin" >
+                <div class="option">
+                    <i class="fas fa-tractor" title="control"></i>
+                    <h4>Agregar galpones</h4>
+                </div>
+            </a>
+            
+            <a class="button" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="pollos">
+                <div class="option">
+                    <i class="fas fa-hammer"></i>
+                    <h4>Administración de galpones</h4>
+                </div>
+            </a>
+        </div>
+    </div><!-- FIN BARRA LATERAL -->
+    <!-- INICIO DEL MAIN( CONTENIDO DE LOS COMPONENTES) -->
+  <main >  
+       <router-outlet> </router-outlet>
+       
+  </main> 
+    
+</body>
+<!-- FIN DEL BODY -->

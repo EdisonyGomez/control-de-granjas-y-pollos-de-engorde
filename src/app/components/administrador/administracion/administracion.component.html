@@ -1,0 +1,153 @@
+<div class="flex-container"  >
+    <!-- <div class="cont" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="../visitantes" style="max-width: 18rem; cursor: pointer; "> -->
+        <div class="contenedor" (click)="open(mymodal)" >   
+          <figure class="snip1566"  >
+            <img src="assets/img/pollos.jpg">
+          </figure>  
+          <div class="contenedor2">  
+            <i class="fas fa-plus-circle fa-2x"></i> 
+            <h5 class="card-title">&nbsp; Agregar galpón de pollos</h5>               
+          </div>
+        </div>
+        <div class="contenedor">   
+          <figure class="snip1566"  (click)="open(mymodal)">
+            <img src="assets/img/gallinas.jpg">
+          </figure>  
+          <div class="contenedor2">  
+            <i class="fas fa-plus-circle fa-2x"></i> 
+            <h5 class="card-title">&nbsp; Agregar galpón de ponedoras</h5>               
+          </div>
+        </div>
+        <div class="contenedor">   
+          <figure class="snip1566"  (click)="open(mymodal)">
+            <img src="assets/img/codornices.jpg">
+          </figure>  
+          <div class="contenedor2">  
+            <i class="fas fa-plus-circle fa-2x"></i> 
+            <h5 class="card-title">&nbsp; Agregar galpón de codornices</h5>               
+          </div>
+        </div>
+  <router-outlet> </router-outlet>
+</div>
+  <!-- -------------------------------------------------------------------------- -->
+<!---------------------------- Modal para pollos----------------------------------------->
+<ng-template #mymodal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Nuevo Galpon (los campos con * son  obligatorios)</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">x</span>
+            </button>
+          </div>
+             <form #polloForm="ngForm"  (ngSubmit)="onSubmit(polloForm)"  >
+              <div class="formulario" >     
+                    <input hidden  name="$key" #$key="ngModel" [(ngModel)]="polloService.selectedPollo.$key"> 
+                   <div class="column">
+                    <div class="form-group">
+                        <label for="" style="color:red">*</label>
+                        <input type="number"
+                               #numero_galpon="ngModel"
+                               [(ngModel)]="polloService.selectedPollo.numero_galpon"
+                               class="form-control" 
+                               name="numero_galpon" 
+                               placeholder="Numero de galpon" 
+                               step="0.01"
+                               autocomplete="off"
+                               style="initial-value: '';" 
+                            >
+                    </div>
+                     <div class="form-group">
+                      <label for="" style="color:red">*</label>
+                      <input  type="text" 
+                                #numero_pollos="ngModel"
+                                [(ngModel)]="polloService.selectedPollo.numero_pollos"
+                                class="form-control"
+                                name="numero_pollos"
+                                placeholder="Numero de pollos"  
+                                required>
+                    </div>
+                    <div class="form-group">
+                      <label for="" class="text-white" >salida</label>
+                      <input  type="text" 
+                              #peso_sacrificio="ngModel"
+                              [(ngModel)]="polloService.selectedPollo.peso_sacrificio"
+                              class="form-control"
+                              name="peso_sacrificio"
+                              placeholder="Peso al sacrificio"  
+                              >
+                    </div>
+                    <div class="form-group">
+                      <label for="" class="text-white" >muerte_pre_sacreificio</label>
+                      <input  type="text" 
+                              #muerte_pre_sacrificio="ngModel"
+                              [(ngModel)]="polloService.selectedPollo.muerte_pre_sacrificio"
+                              class="form-control"
+                              name="muerte_pre_sacrificio"
+                              placeholder="muertes pre sacrificio"  
+                              >
+                    </div>
+                    <div class="form-group">
+                      <label for="" class="text-white" >medicamentos</label>
+                      <input  type="text" 
+                              #medicamentos="ngModel"
+                              [(ngModel)]="polloService.selectedPollo.medicamentos"
+                              class="form-control"
+                              name="medicamentos"
+                              placeholder="Vacunas y medicamentos"  
+                              >
+                    </div> 
+                </div>
+                <hr>
+                <div class="column">                  
+                  <div class="form-group">
+                    <label for="" >fecha de ingreso</label>
+                    <input type="date" 
+
+                        class="form-control"
+                        name="fecha_ingreso"
+                        #fecha_ingreso="ngModel"
+                        [ngModel]='polloService.selectedPollo.fecha_ingreso | date:"dd-MM-yyyy" '
+                        (ngModelChange)='date=$event'>
+                  </div> 
+                   <div class="form-group">
+                    <label for="" >fecha de egreso</label>
+                    <input type="date"
+                           class="form-control" 
+                           name="fecha_egreso"
+                           #fecha_egreso="ngModel"
+                                            
+                          [ngModel]='polloService.selectedPollo.fecha_egreso  '
+                       
+                 
+                      >
+                  </div>               
+                  <div class="form-group">
+                    <label for="" class="text-white" >Observaciones</label>
+                    <input type="text" 
+                            #observaciones="ngModel"
+                            [(ngModel)]="polloService.selectedPollo.observaciones"
+                            class="form-control"
+                            name="observaciones"
+                            placeholder="Observaciones"
+                            style="height: 130px;"
+                        >
+                  </div>
+                </div>              
+              </div>
+               <div class="modal-footer">
+                <button type="submit" class="btn btn-danger" >
+                    <i class="fas fa-plus-circle"></i> registrar
+                </button>
+            
+                <button type="reset" class="btn btn-info" 
+                        (click)="resetForm(polloForm)" style="margin-top: 10px; margin-left: 3px; ">
+                    <i class="fas fa-eraser"></i>Borrar selección
+                </button>
+                
+                  <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')" >Ok</button> -->
+                </div>
+            </form>
+</ng-template>
+<!---------------------------- Modal para pollos----------------------------------------->
+
+
+   

@@ -1,0 +1,42 @@
+<div class="card">
+    <div class="header text-white" style="text-align: center;">
+         <h1>Lista de Galpones de pollos </h1>
+     </div>
+     <div class="table-container text-center">
+         <table class="table table-responsive-md table-sm table-hover">
+             <tbody>
+                 <tr>
+                     <td>Numero de galpon</td>
+                     <td>Numero de pollos  </td>
+                     <td>Peso al sacrificio</td>
+                     <td>Fecha de ingreso</td>
+                     <td>Fecha de egreso</td>
+                     <td>Acción</td>
+
+                 </tr>
+                 <tr *ngFor="let pollo of polloList |paginate: { itemsPerPage: 4, currentPage: page }">
+                     <td>{{pollo.numero_galpon}}</td>
+                     <td>{{pollo.numero_pollos}}</td>
+                     <td>{{pollo.peso_sacrificio}}</td>
+                     <td>{{pollo.fecha_ingreso}}</td>
+                     <td>{{pollo.fecha_egreso}}</td>
+
+
+                     <td>
+                         <a class="btn btn-sm btn-secondary" (click)="onEdit(pollo)" >
+                             <i class="far fa-edit"></i>    editar
+                         </a>
+                          <a class="btn btn-sm btn-danger" (click)="onDelete(pollo.$key)">
+                             <i class="far fa-trash-alt"></i>    eliminar
+                         </a>
+                     </td>
+                 </tr>
+             </tbody>
+         </table>
+         <pagination-controls 
+                             (pageChange)="page = $event"
+                             previousLabel="Anterior"
+                             nextLabel="Siguiente">
+        </pagination-controls>
+     </div>
+ </div>

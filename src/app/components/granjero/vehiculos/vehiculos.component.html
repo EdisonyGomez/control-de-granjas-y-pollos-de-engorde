@@ -1,0 +1,60 @@
+<div class="flex-container"  >
+    <div class="formulario" >
+            <div class="header text-white" style="text-align: center;">
+                <i class="fas fa-arrow-circle-left" 
+                    style="float: left; cursor: pointer;" 
+                    routerLinkActive="active" routerLink="../ingreso"  
+                    [routerLinkActiveOptions]="{exact: true}">volver 
+                </i>
+                <h1 >Registro de Vehiculos</h1>
+            </div>
+            <form #vehiculoForm="ngForm" (ngSubmit)="onSubmit(vehiculoForm)"  >
+                <input hidden  name="$key" #$key="ngModel" [(ngModel)]="visitanteService.selectedVehiculo.$key"> 
+                <div class="form-group">
+                    <label for="" hidden class="text-white">Placa</label>
+                    <input type="text"                         
+                        class="form-control" 
+                        name="placa" 
+                        #placa="ngModel"
+                        [(ngModel)]="visitanteService.selectedVehiculo.placa"
+                        placeholder="Ingrese la placa"  
+                         >
+                </div>
+                <div class="form-group">
+                    <label for="" class="text-white" >nombre</label>
+                    <input  type="text" 
+                            class="form-control"
+                            name="nombre_propietario"
+                            #nombre="ngModel"
+                            [(ngModel)]="visitanteService.selectedVehiculo.nombre_propietario"
+                            placeholder="Nombre del propietario"
+                            >
+                </div>
+                <div class="form-group">
+                    <label for="" class="text-white">apellido</label>
+                    <input type="text" 
+                        class="form-control"
+                        name="apellido_propietario"
+                        #apellido="ngModel"
+                        [(ngModel)]="visitanteService.selectedVehiculo.apellido_propietario"
+                        placeholder="Apellido del propietario" 
+                        >
+                </div>
+            
+                    <button type="submit" class="btn btn-danger" style="margin-top: 10px;">
+                        <i class="fas fa-plus-circle"></i> registrar
+                    </button>
+                
+                    <button type="reset" class="btn btn-info" 
+                              (click)="resetForm(vehiculoForm)" style="margin-top: 10px; margin-left: 3px; ">
+                        <i class="fas fa-eraser"></i>Borrar selección
+                    </button>
+                
+            </form>
+
+        
+        </div>
+        <div class="app-lista-vehiculos" style="padding-top: 15px;">
+            <app-lista-vehiculos></app-lista-vehiculos>
+        </div>
+</div>

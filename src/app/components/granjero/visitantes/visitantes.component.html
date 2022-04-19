@@ -1,0 +1,56 @@
+<div class="flex-container"  >
+        <div class="formulario" >
+            <div class="header text-white" style="text-align: center;">
+                <i class="fas fa-arrow-circle-left" 
+                    style="float: left; cursor: pointer;" 
+                    routerLinkActive="active" routerLink="../ingreso"  
+                    [routerLinkActiveOptions]="{exact: true}">volver 
+                </i>
+                <h1 >Registro de Visitantes</h1>
+            </div>
+            <form #visitanteForm="ngForm" (ngSubmit)="onSubmit(visitanteForm)"  >
+                <input hidden  name="$key" #$key="ngModel" [(ngModel)]="visitanteService.selectedVisitante.$key"> 
+                <div class="form-group">
+                    <label for="" hidden class="text-white">nombre</label>
+                    <input type="text"
+                         
+                        class="form-control" 
+                        name="nombre" 
+                        #nombre="ngModel"
+                        [(ngModel)]="visitanteService.selectedVisitante.nombre"
+                        placeholder="Nombre(s)"  
+                         >
+                </div>
+                <div class="form-group">
+                    <label for="" class="text-white" >apellido</label>
+                    <input  type="text" 
+                            class="form-control"
+                            name="apellido"
+                            #apellido="ngModel"
+                            [(ngModel)]="visitanteService.selectedVisitante.apellido"
+                            placeholder="Apellido(s)"  
+                            >
+                </div>
+                <div class="form-group">
+                    <label for="" class="text-white">documento</label>
+                    <input type="text" 
+                        class="form-control"
+                        name="documento"
+                        #documento="ngModel"
+                        [(ngModel)]="visitanteService.selectedVisitante.documento"
+                        placeholder="Documento" 
+                        >
+                </div>
+            
+                    <button type="submit" class="btn btn-danger" style="margin-top: 10px;">
+                        <i class="fas fa-plus-circle"></i> registrar
+                    </button>
+                
+                    <button type="reset" class="btn btn-info" 
+                            (click)="resetForm(visitanteForm)" style="margin-top: 10px; margin-left: 3px; ">
+                        <i class="fas fa-eraser"></i>Borrar selección
+                    </button>
+            </form>
+        </div>
+            <app-lista-visitantes></app-lista-visitantes>
+</div>

@@ -1,0 +1,64 @@
+<body>
+  
+
+<div class="displayTable">
+    <div class="displayTableCell">
+      <div class="authBlock">
+        <h3>Accceso </h3>
+        <form #loginForm="ngForm" (ngSubmit)="authService.SignIn(userName.value, userPassword.value)"  >
+          <div class="form-group form-primary group-material-login">
+            <input type="text" class="form-control material-login-control"  #userName required>
+            <span class="highlight-login"></span>
+            <span class="bar-login"></span>
+            <label><i class="fas fa-user"></i> &nbsp; Usuario</label>
+          </div>
+          <div class="form-group form-primary group-material-login">
+            <input type="password" name="password" id="password1" class="form-control material-login-control "  
+              autocomplete="on" #userPassword required>
+              <span class="fa fa-fw fa-eye show-password" id="password-icon" style="
+              float: right;
+              margin: -25px 10px 0 0;
+             
+              cursor: pointer;" ></span>
+              <span class="highlight-login"></span>
+            <span class="bar-login"></span>
+            <label>
+              <i class="fas fa-key"></i> &nbsp; Contraseña
+             
+            </label> 
+          </div>
+          <!-- Calling SignIn Api from AuthService -->
+          <!-- <div class="form-group">
+             <input type="button" class="btn btn-primary" value="Iniciar sesión" 
+              (click)="authService.SignIn(userName.value, userPassword.value)">
+          </div> -->
+          <button type="submit" class="btn-primary">
+            Iniciar sesión
+          </button>
+        </form>
+          <div class="or-container">
+            <div class="line-separator"></div>
+            <div class="or-label">O</div>
+            <div class="line-separator"></div>
+        </div>
+        <form >
+          <!-- Calling GoogleAuth Api from AuthService -->
+          <div class="form-group">
+            <button type="button" class="btn btn-lg btn-google btn-block text-uppercase btn-outline"
+               (click)="authService.GoogleAuth()">
+              <i class="fab fa-google"></i>
+              Accede con  Google
+            </button>         
+          </div>
+        </form>
+          <div class="forgotPassword">
+            <span routerLink="/clave-olvidada">Olvidaste la contraseña?</span>
+          </div>
+          <div class="redirectToLogin">
+            <span>¿No tienes cuenta?<span class="redirect" routerLink="/registrar-usuario"> 
+              Registrate</span></span>
+          </div>   
+      </div>      
+    </div>
+  </div>
+</body>

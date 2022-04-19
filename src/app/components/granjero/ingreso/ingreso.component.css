@@ -1,0 +1,26 @@
+.flex-container{
+    display:flex;
+    justify-content: space-evenly;
+    align-content: center;
+    flex-wrap: wrap ;
+    padding-top:100px
+
+  }
+  .card{ 
+    width: 200px;
+    height: 150px;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    display:flex;    
+  }
+  
+  .card:hover{
+    transition: 100ms cubic-bezier(0.450, 0.30, 0.55, 0.95);
+    transform: scale(1.1);
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    -webkit-animation: dash 12s ease alternate;
+            animation: dash 12s ease alternate;
+            color: white;
+  }

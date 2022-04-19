@@ -1,0 +1,35 @@
+<div class="card">
+   <div class="header text-white" style="text-align: center;">
+        <h1>Lista de vehiculos</h1>
+    </div>
+    <div class="table-container text-center">
+        <table class="table table-responsive-md table-sm table-hover">
+            <tbody>
+                <tr>
+                    <td>Placa</td>
+                    <td>Nombre propietario </td>
+                    <td>Apellido propietario </td>
+                    <td>Ación</td>
+                </tr>
+                <tr *ngFor="let vehiculo of vehiculoList |paginate: { itemsPerPage: 4, currentPage: page }">
+                    <td>{{vehiculo.placa}}</td>
+                    <td>{{vehiculo.nombre_propietario}}</td>
+                    <td>{{vehiculo.apellido_propietario}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-secondary" (click)="onEdit(vehiculo)" >
+                            <i class="far fa-edit"></i>    editar
+                        </a>
+                         <a class="btn btn-sm btn-danger" (click)="onDelete(vehiculo.$key)">
+                            <i class="far fa-trash-alt"></i>    eliminar
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls 
+                            (pageChange)="page = $event"
+                            previousLabel="Anterior"
+                            nextLabel="Siguiente">
+       </pagination-controls>
+    </div>
+</div>
