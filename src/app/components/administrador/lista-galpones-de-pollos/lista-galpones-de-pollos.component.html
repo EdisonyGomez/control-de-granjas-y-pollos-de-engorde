@@ -1,42 +1,156 @@
-<div class="card">
-    <div class="header text-white" style="text-align: center;">
-         <h1>Lista de Galpones de pollos </h1>
-     </div>
-     <div class="table-container text-center">
-         <table class="table table-responsive-md table-sm table-hover">
-             <tbody>
-                 <tr>
-                     <td>Numero de galpon</td>
-                     <td>Numero de pollos  </td>
-                     <td>Peso al sacrificio</td>
-                     <td>Fecha de ingreso</td>
-                     <td>Fecha de egreso</td>
-                     <td>Acción</td>
+<div class="flex-container">
+    <div class="card">
+        <div class="header text-white" style="text-align: center;">
+            <h1>Lista de Galpones de pollos </h1>
+        </div>
+        <div class="table-container text-center">
+            <table class="table table-responsive-md table-sm table-hover">
+                <tbody>
+                    <tr>
+                        <td>Numero de galpon</td>
+                        <td>Numero de pollos  </td>
+                        <td>Peso al sacrificio</td>
+                        <td>Fecha de ingreso</td>
+                        <td>Fecha de egreso</td>
+                        <td>Acción</td>
 
-                 </tr>
-                 <tr *ngFor="let pollo of polloList |paginate: { itemsPerPage: 4, currentPage: page }">
-                     <td>{{pollo.numero_galpon}}</td>
-                     <td>{{pollo.numero_pollos}}</td>
-                     <td>{{pollo.peso_sacrificio}}</td>
-                     <td>{{pollo.fecha_ingreso}}</td>
-                     <td>{{pollo.fecha_egreso}}</td>
+                    </tr>
+                    <tr *ngFor="let pollo of polloList |paginate: { itemsPerPage:3, currentPage: page }">
+                        <td>{{pollo.numero_galpon}}</td>
+                        <td>{{pollo.numero_pollos}}</td>
+                        <td>{{pollo.peso_sacrificio}}</td>
+                        <td>{{pollo.fecha_ingreso}}</td>
+                        <td>{{pollo.fecha_egreso}}</td>
 
 
-                     <td>
-                         <a class="btn btn-sm btn-secondary" (click)="onEdit(pollo)" >
-                             <i class="far fa-edit"></i>    editar
-                         </a>
-                          <a class="btn btn-sm btn-danger" (click)="onDelete(pollo.$key)">
-                             <i class="far fa-trash-alt"></i>    eliminar
-                         </a>
-                     </td>
-                 </tr>
-             </tbody>
-         </table>
-         <pagination-controls 
-                             (pageChange)="page = $event"
-                             previousLabel="Anterior"
-                             nextLabel="Siguiente">
-        </pagination-controls>
-     </div>
- </div>
+                        <td>
+                            <a class="btn btn-sm btn-secondary" (click)="onEdit(pollo) " (click)="open(mymodal)"  >
+                                <i class="far fa-edit"></i>    editar
+                            </a>
+                            <a class="btn btn-sm btn-danger" (click)="onDelete(pollo.$key)">
+                                <i class="far fa-trash-alt"></i>    eliminar
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls 
+                                (pageChange)="page = $event"
+                                previousLabel="Anterior"
+                                nextLabel="Siguiente">
+            </pagination-controls>
+        </div>
+    </div>
+<hr>
+
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Nuevo Galpon (los campos con * son  obligatorios)</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">x</span>
+      </button>
+    </div>
+       <form #polloForm="ngForm"  (ngSubmit)="onSubmit(polloForm)"  >
+        <div class="formulario" >     
+              <input hidden  name="$key" #$key="ngModel" [(ngModel)]="polloService.selectedPollo.$key"> 
+             <div class="column">
+              <div class="form-group">
+                  <label for="" style="color:red">*</label>
+                  <input type="number"
+                         #numero_galpon="ngModel"
+                         [(ngModel)]="polloService.selectedPollo.numero_galpon"
+                         class="form-control" 
+                         name="numero_galpon" 
+                         placeholder="Numero de galpon" 
+                         step="0.01"
+                         autocomplete="off"
+                         style="initial-value: '';" 
+                      >
+              </div>
+               <div class="form-group">
+                <label for="" style="color:red">*</label>
+                <input  type="text" 
+                          #numero_pollos="ngModel"
+                          [(ngModel)]="polloService.selectedPollo.numero_pollos"
+                          class="form-control"
+                          name="numero_pollos"
+                          placeholder="Numero de pollos"  
+                          required>
+              </div>
+              <div class="form-group">
+                <label for="" class="text-white" >salida</label>
+                <input  type="text" 
+                        #peso_sacrificio="ngModel"
+                        [(ngModel)]="polloService.selectedPollo.peso_sacrificio"
+                        class="form-control"
+                        name="peso_sacrificio"
+                        placeholder="Peso al sacrificio"  
+                        >
+              </div>
+              <div class="form-group">
+                <label for="" class="text-white" >muerte_pre_sacreificio</label>
+                <input  type="text" 
+                        #muerte_pre_sacrificio="ngModel"
+                        [(ngModel)]="polloService.selectedPollo.muerte_pre_sacrificio"
+                        class="form-control"
+                        name="muerte_pre_sacrificio"
+                        placeholder="muertes pre sacrificio"  
+                        >
+              </div>
+              <div class="form-group">
+                <label for="" class="text-white" >medicamentos</label>
+                <input  type="text" 
+                        #medicamentos="ngModel"
+                        [(ngModel)]="polloService.selectedPollo.medicamentos"
+                        class="form-control"
+                        name="medicamentos"
+                        placeholder="Vacunas y medicamentos"  
+                        >
+              </div> 
+          </div>
+          <hr>
+          <div class="column">                  
+            <div class="form-group">
+              <label for="" >fecha de ingreso</label>
+              <input type="date"
+                  class="form-control"
+                  name="fecha_ingreso"
+                  #fecha_ingreso="ngModel"
+                  [ngModel]='polloService.selectedPollo.fecha_ingreso'>
+            </div> 
+             <div class="form-group">
+              <label for="" >fecha de egreso</label>
+              <input type="date"
+                     class="form-control" 
+                     name="fecha_egreso"
+                     #fecha_egreso="ngModel"                                      
+                    [ngModel]='polloService.selectedPollo.fecha_egreso'>
+            </div>               
+            <div class="form-group">
+              <label for="" class="text-white" >Observaciones</label>
+              <input type="text" 
+                      #observaciones="ngModel"
+                      [(ngModel)]="polloService.selectedPollo.observaciones"
+                      class="form-control"
+                      name="observaciones"
+                      placeholder="Observaciones"
+                      style="height: 130px;"
+                  >
+            </div>
+          </div>              
+        </div>
+         <div class="modal-footer">
+          <button type="submit" class="btn btn-danger" >
+              <i class="fas fa-plus-circle"></i> registrar
+          </button>
+      
+          <button type="reset" class="btn btn-info" 
+                  (click)="resetForm(polloForm)" style="margin-top: 10px; margin-left: 3px; ">
+              <i class="fas fa-eraser"></i>Borrar selección
+          </button>
+          
+            <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')" >Ok</button> -->
+          </div>
+      </form>
+</ng-template>
+</div>

@@ -1,3 +1,25 @@
+.flex-container{
+    padding: 20px;
+}
 .card{
-    margin-top: 50px;
+    margin-top: 70px;
+    box-shadow: 0 8px 17px 2px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%), 0 5px 5px -3px rgb(0 0 0 / 20%); border-radius:7px; 
+}
+
+.header h1{
+    background-color: #f35b5b;
+    padding: 20px;
+    text-align: center;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px; 
+}
+.table-container{
+    padding: 20px;
+     text-align: center;
+ }
+ .btn{
+    margin: 3px;
+    width: 63%;
+    height:25px;
+    font-size: 13px;
 }

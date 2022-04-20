@@ -1,9 +1,14 @@
 import { NgForm } from '@angular/forms';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
+
+//class
 import { Pollo } from 'src/app/models/pollo';
+
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { GalponService } from 'src/app/services/galpones/galpon.service';
+
+//service
 import { VisitanteService } from 'src/app/services/visitantes/visitante.service';
 
 
@@ -31,9 +36,9 @@ export class AdministracionComponent implements OnInit {
   }
 
 
-  resetForm(adminForm?: NgForm){
-    if (adminForm != null)
-    adminForm.reset ();
+  resetForm(polloForm?: NgForm){
+    if (polloForm != null)
+    polloForm.reset ();
     this.polloService.selectedPollo = new Pollo();
 }
 
