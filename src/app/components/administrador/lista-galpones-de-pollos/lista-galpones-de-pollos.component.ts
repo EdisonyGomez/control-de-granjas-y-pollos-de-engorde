@@ -66,7 +66,7 @@ onSubmit(polloForm: NgForm): void {
 resetForm(polloForm?: NgForm){
   if (polloForm != null)
   polloForm.reset ();
-  this.polloService.selectedPollo = new Pollo();
+  // this.polloService.selectedPollo = new Pollo();
 }
 
 open(content:any) {

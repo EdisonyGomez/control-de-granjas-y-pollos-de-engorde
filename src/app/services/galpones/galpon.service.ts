@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 //firebase
 import { AngularFireDatabase,  AngularFireList } from '@angular/fire/compat/database';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 //clases
 import { Pollo } from '../../models/pollo';
@@ -13,15 +14,22 @@ import { Vehiculo } from './../../models/vehiculo';
 })
 export class GalponService {
 
- //VISITANTE
+ //POLLO
  polloList!: AngularFireList<any>;
- selectedPollo: Pollo = new Pollo();
+ selectedPollo: Pollo ;
+// selectedPollo: Pollo ;
  
  //VEHICULO
  vehiculoList!: AngularFireList<any>;
  selectedVehiculo: Vehiculo = new Vehiculo();
 
- constructor(private firebase: AngularFireDatabase) { }
+ constructor(private firebase: AngularFireDatabase,
+             private fir: AngularFirestore ) { }
+
+
+guardarPollo(pollo:Pollo): Promise<any>{
+return this.fir.collection('pollos').add(pollo);
+}
   
 //-----------------------------------------------------------------
   //Get pollo
@@ -61,6 +69,7 @@ export class GalponService {
  //-----------------------------------------------------------------
  //Actualizar pollo
    updatepollo(pollo: Pollo){
+
        this.polloList.update(pollo.$key,{
         numero_galpon: pollo.numero_galpon,
         numero_pollos: pollo.numero_pollos,
@@ -71,6 +80,7 @@ export class GalponService {
         fecha_egreso: pollo.fecha_egreso,
         observaciones: pollo.observaciones
          });
+         
    }
 
    //Actualizar Vehiculo

@@ -1,5 +1,6 @@
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 //class
 import { Pollo } from 'src/app/models/pollo';
@@ -10,6 +11,7 @@ import { GalponService } from 'src/app/services/galpones/galpon.service';
 
 //service
 import { VisitanteService } from 'src/app/services/visitantes/visitante.service';
+import { group } from 'console';
 
 
 
@@ -22,11 +24,27 @@ import { VisitanteService } from 'src/app/services/visitantes/visitante.service'
 export class AdministracionComponent implements OnInit {
   closeResult: string = '';
    date=new Date();
+
+   form: FormGroup;
+   loading = false;
+
   constructor(public polloService:GalponService,
-              private modalService: NgbModal,     
+              private modalService: NgbModal, 
+              private toastr: ToastrService,    
               public datepipe: DatePipe,
+              private fb: FormBuilder,
               public visitanteService:VisitanteService) {
-              
+                
+                this.form = this.fb.group({
+                  numero_galpon: ['', Validators.required],
+                  numero_pollos: ['', Validators.required],
+                  peso_sacrificio: ['', ],
+                  muerte_pre_sacrificio: ['', ],
+                  medicamentos: ['', ],
+                  fecha_ingreso: ['', Validators.required],
+                  fecha_egreso: ['', ],
+                  observaciones: ['', ],                  
+                })
               }
 
   ngOnInit(): void {
@@ -39,14 +57,43 @@ export class AdministracionComponent implements OnInit {
   resetForm(polloForm?: NgForm){
     if (polloForm != null)
     polloForm.reset ();
-    this.polloService.selectedPollo = new Pollo();
+    // this.polloService.selectedPollo = new Pollo();
 }
+resetForm2(form?: FormGroup){
+  if (form != null)
+  form.reset ();
+}
+  onSubmit2(){
+    const pollo: Pollo ={
+      numero_galpon: this.form.value.numero_galpon,
+      numero_pollos: this.form.value.numero_pollos,
+      peso_sacrificio: this.form.value.peso_sacrificio,
+      muerte_pre_sacrificio: this.form.value.muerte_pre_sacrificio,
+      medicamentos: this.form.value.medicamentos,
+      fecha_ingreso: this.form.value.fecha_ingreso,
+      fecha_egreso: this.form.value.fecha_egreso,
+      observaciones: this.form.value.observaciones
+    }
+    this.loading =true;
+    this.polloService.guardarPollo(pollo).then(()=> {
+       this.loading=false; 
+      this.toastr.success('Galpón creado satisfatoriamente', 'Operación completada'); 
+      this.resetForm2(this.form);
+    }, error => {
+       this.loading=false; 
+
+    this.toastr.error(error, 'algo pasó');
+    })
+  }
 
 onSubmit(polloForm: NgForm): void {
   if(polloForm.value.$key == ""){
-    this.polloService.insertpollo(polloForm.value)
+    this.polloService.insertpollo(polloForm.value);
+    this.toastr.success('Galpón creado satisfatoriamente', 'Operación completada');
+    this.resetForm(polloForm) ;
   }else{
    this.polloService.updatepollo(polloForm.value) ;
+   this.toastr.success('Datos actualizados', 'Operación completada');
    this.resetForm(polloForm) ;
   }
 }
@@ -58,6 +105,8 @@ onSubmit(polloForm: NgForm): void {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+    this.resetForm() ;
+
   } 
     
   /**
