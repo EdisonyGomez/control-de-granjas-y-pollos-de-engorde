@@ -31,28 +31,31 @@
 </div> 
   <!-- -------------------------------------------------------------------------- -->
 <!---------------------------- Modal para pollos----------------------------------------->
-<ng-template #mymodal let-modal>
-          <div class="modal-header text-center" style="text-align: center;">
-            <h4 class="modal-title" id="modal-basic-title">Nuevo Galpon
-              <div *ngIf="loading" class="spinner-border float-end" role="status">
-                <span class="sr-only">Loading...</span>
-              </div>
-            </h4>
-            <div>
-              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+<ng-template #mymodal let-modal class="modal">
+          <div class="modal-header text-center">
+            <div class="text-center" style="text-align: center; display: flex; justify-content: center;align-items: center; ">
+              <h4 class="modal-title" id="modal-basic-title" >
+                Nuevo Galpon
+                <div *ngIf="loading" class="spinner-border text-danger float-end" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </h4>
+            </div>
+            <div class="float-end">
+              <button type="button" class="close " aria-label="Close" (click)="modal.dismiss('Cross click')">
                 <span aria-hidden="true">x</span>
               </button>
             </div>
           </div>
-                  <h6>los campos con <span style="color:red">*</span>  son  obligatorios</h6> 
 
              <!-- <form #polloForm="ngForm"  (ngSubmit)="onSubmit(polloForm)"  > -->
              <form [formGroup]="form" (ngSubmit)="onSubmit2()"  >
-
-              <div class="formulario" >    
+              <div style="margin-left: 20px;">
+                <h6>Los campos con <span style="color:red">*</span>  son  obligatorios</h6> 
+              </div>
+              <div class="formulario" >                 
                     <!-- <input hidden  name="$key" #$key="ngModel" [(ngModel)]="polloService.selectedPollo.$key">  -->
                    <div class="column">
-
                     <div class="form-group">
                         <label for="" style="color:red">*</label>
                         <!-- <input type="number"
@@ -131,7 +134,7 @@
                 <hr>
                 <div class="column">                  
                   <div class="form-group">
-                    <label for="" >fecha de ingreso</label>
+                    <label for="" >fecha de ingreso <span style="color:red">*</span></label>
                     <!-- <input type="date" 
 
                         class="form-control"
@@ -141,7 +144,9 @@
                         (ngModelChange)='date=$event'> -->
                         <input type="date"
                         class="form-control" 
-                        formControlName="fecha_ingreso">
+                        formControlName="fecha_ingreso"
+                        [ngModel]='date | date:"yyyy-MM-dd" '
+                        (ngModelChange)='date=$event'>
                   </div> 
                    <div class="form-group">
                     <label for="" >fecha de egreso</label>

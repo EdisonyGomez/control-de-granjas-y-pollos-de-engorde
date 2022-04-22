@@ -1,5 +1,5 @@
 export class Pollo {
-    $key?: string;
+    id?: string;
     numero_galpon:string; 
     numero_pollos: string;
     peso_sacrificio: string;
