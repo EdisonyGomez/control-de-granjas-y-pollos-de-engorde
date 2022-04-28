@@ -1,6 +1,6 @@
 <div class="flex-container"  >
     <!-- <div class="cont" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="../visitantes" style="max-width: 18rem; cursor: pointer; "> -->
-        <div class="contenedor" (click)="open(mymodal)" >   
+        <div class="contenedor" (click)="open(modalPollos)" >   
           <figure class="snip1566"  >
             <img src="assets/img/pollos.jpg">
           </figure>  
@@ -9,29 +9,29 @@
             <h5 class="card-title">&nbsp; Agregar galpón de pollos</h5>               
           </div>
         </div>
-        <div class="contenedor">   
-          <figure class="snip1566"  (click)="open(mymodal)">
+        <div class="contenedor" (click)="open(modalGallinas)">   
+          <figure class="snip1566" >
             <img src="assets/img/gallinas.jpg">
           </figure>  
           <div class="contenedor2">  
             <i class="fas fa-plus-circle fa-2x"></i> 
-            <h5 class="card-title">&nbsp; Agregar galpón de ponedoras</h5>               
+            <h5 class="card-title">&nbsp; Registro de ponedoras</h5>               
           </div>
         </div>
-        <div class="contenedor">   
-          <figure class="snip1566"  (click)="open(mymodal)">
+        <div class="contenedor"  (click)="open(modalCodornices)">   
+          <figure class="snip1566">
             <img src="assets/img/codornices.jpg">
           </figure>  
           <div class="contenedor2">  
             <i class="fas fa-plus-circle fa-2x"></i> 
-            <h5 class="card-title">&nbsp; Agregar galpón de codornices</h5>               
+            <h5 class="card-title">&nbsp; Registro de codornices</h5>               
           </div>
         </div>
   <router-outlet> </router-outlet>
 </div> 
   <!-- -------------------------------------------------------------------------- -->
 <!---------------------------- Modal para pollos----------------------------------------->
-<ng-template #mymodal let-modal class="modal">
+<ng-template #modalPollos let-modal class="modal">
           <div class="modal-header text-center">
             <div class="text-center" style="text-align: center; display: flex; justify-content: center;align-items: center; ">
               <h4 class="modal-title" id="modal-basic-title" >
@@ -48,26 +48,14 @@
             </div>
           </div>
 
-             <!-- <form #polloForm="ngForm"  (ngSubmit)="onSubmit(polloForm)"  > -->
-             <form [formGroup]="form" (ngSubmit)="onSubmit2()"  >
+             <form [formGroup]="formPollo" (ngSubmit)="onSubmitPollo()"  >
               <div style="margin-left: 20px;">
                 <h6>Los campos con <span style="color:red">*</span>  son  obligatorios</h6> 
               </div>
               <div class="formulario" >                 
-                    <!-- <input hidden  name="$key" #$key="ngModel" [(ngModel)]="polloService.selectedPollo.$key">  -->
                    <div class="column">
                     <div class="form-group">
                         <label for="" style="color:red">*</label>
-                        <!-- <input type="number"
-                               #numero_galpon="ngModel"
-                               [(ngModel)]="polloService.selectedPollo.numero_galpon"
-                               class="form-control" 
-                               name="numero_galpon" 
-                               placeholder="Numero de galpon" 
-                               step="0.01"
-                               autocomplete="off"
-                               style="initial-value: '';" 
-                            > -->
                             <input type="number"
                                    class="form-control" 
                                    formControlName="numero_galpon" 
@@ -75,57 +63,29 @@
                     </div>
                      <div class="form-group">
                       <label for="" style="color:red">*</label>
-                      <!-- <input  type="text" 
-                                #numero_pollos="ngModel"
-                                [(ngModel)]="polloService.selectedPollo.numero_pollos"
-                                class="form-control"
-                                name="numero_pollos"
-                                placeholder="Numero de pollos"  
-                                required>-->
-                                <input type="number"
-                            class="form-control" 
-                            formControlName="numero_pollos" 
-                            placeholder="Numero de pollos">
+                          <input type="number"
+                                  class="form-control" 
+                                  formControlName="numero_pollos" 
+                                  placeholder="Cantidad de pollos">
                     </div> 
                     
                     <div class="form-group">
                       <label for="" class="text-white" >salida</label>
-                      <!-- <input  type="text" 
-                              #peso_sacrificio="ngModel"
-                              [(ngModel)]="polloService.selectedPollo.peso_sacrificio"
-                              class="form-control"
-                              name="peso_sacrificio"
-                              placeholder="Peso al sacrificio"  
-                              > -->
-                              <input type="number"
+                            <input type="number"
                                    class="form-control" 
                                    formControlName="peso_sacrificio" 
                                    placeholder="Peso al sacrificio">
                     </div>
                     <div class="form-group">
                       <label for="" class="text-white" >muerte_pre_sacreificio</label>
-                      <!-- <input  type="text" 
-                              #muerte_pre_sacrificio="ngModel"
-                              [(ngModel)]="polloService.selectedPollo.muerte_pre_sacrificio"
-                              class="form-control"
-                              name="muerte_pre_sacrificio"
-                              placeholder="muertes pre sacrificio"  
-                              > -->
-                              <input type="number"
+                            <input type="number"
                                    class="form-control" 
                                    formControlName="muerte_pre_sacrificio" 
                                    placeholder="muertes pre sacrificio">
                     </div>
                     <div class="form-group">
                       <label for="" class="text-white" >medicamentos</label>
-                      <!-- <input  type="text" 
-                              #medicamentos="ngModel"
-                              [(ngModel)]="polloService.selectedPollo.medicamentos"
-                              class="form-control"
-                              name="medicamentos"
-                              placeholder="Vacunas y medicamentos"  
-                              > -->
-                              <input type="text"
+                            <input type="text"
                                    class="form-control" 
                                    formControlName="medicamentos" 
                                    placeholder="Vacunas y medicamentos">
@@ -135,49 +95,32 @@
                 <div class="column">                  
                   <div class="form-group">
                     <label for="" >fecha de ingreso <span style="color:red">*</span></label>
-                    <!-- <input type="date" 
-
-                        class="form-control"
-                        name="fecha_ingreso"
-                        #fecha_ingreso="ngModel"
-                        [ngModel]='date | date:"yyyy-MM-dd" '
-                        (ngModelChange)='date=$event'> -->
                         <input type="date"
-                        class="form-control" 
-                        formControlName="fecha_ingreso"
-                        [ngModel]='date | date:"yyyy-MM-dd" '
-                        (ngModelChange)='date=$event'>
+                            class="form-control" 
+                            formControlName="fecha_ingreso"
+                            [ngModel]='date | date:"yyyy-MM-dd" '
+                            (ngModelChange)='date=$event'>
                   </div> 
                    <div class="form-group">
                     <label for="" >fecha de egreso</label>
-                    <!-- <input type="date"
-                           class="form-control" 
-                           name="fecha_egreso"
-                           #fecha_egreso="ngModel"                                            
-                          [ngModel]='polloService.selectedPollo.fecha_egreso'> -->
-                          <input type="date"
-                        class="form-control" 
-                        formControlName="fecha_egreso">
+                      <input type="date"
+                              class="form-control" 
+                              formControlName="fecha_egreso">
                   </div>               
                   <div class="form-group">
                     <label for="" class="text-white" >Observaciones</label>
-                    <!-- <input type="text" 
-                            #observaciones="ngModel"
-                            [(ngModel)]="polloService.selectedPollo.observaciones"
-                            class="form-control"
-                            name="observaciones"
-                            placeholder="Observaciones"
-                            style="height: 130px;"> -->
-                            <input type="text"
-                                   class="form-control" 
-                                   formControlName="observaciones" 
-                                   placeholder="observaciones"
-                                   style="height: 130px;">
+                        <textarea name="textarea"
+                                  placeholder="observaciones" 
+                                  rows="6" 
+                                  cols="20"
+                                  class="form-control" 
+                                  formControlName="observaciones">           
+                        </textarea>
                   </div>
                 </div>              
               </div>
                <div class="modal-footer">
-                <button [disabled]="form.invalid" type="submit" class="btn btn-danger" >
+                <button [disabled]="formPollo.invalid" type="submit" class="btn btn-danger" >
                     <i class="fas fa-plus-circle"></i> registrar
                 </button>
             
@@ -185,12 +128,270 @@
                         (click)="resetForm(polloForm)" style="margin-top: 10px; margin-left: 3px; ">
                     <i class="fas fa-eraser"></i>Borrar selección
                 </button> -->
-                
-                  <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')" >Ok</button> -->
                 </div>
              </form>
 </ng-template>
 <!---------------------------- Modal para pollos----------------------------------------->
 
 
-   
+<!-- --------------------------Modal para gallinas------------------------------------- -->
+<ng-template #modalGallinas let-modal >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Nuevo registro semanal(Ponedoras)
+      <div *ngIf="loading" class="spinner-border text-danger float-end" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">x</span>
+    </button>
+  </div>
+  <form [formGroup]="formGallina" (ngSubmit)="onSubmitGallina()" >
+  <div class="cont" style="padding: 15px; display: flex;">
+  <section class="forms" style="width: 80%; padding: 5px;">    
+        <h6>Los campos con <span style="color:red">*</span>  son  obligatorios</h6> 
+          <div class="form-group">
+            <label for="" >fecha<span style="color:red">*</span></label>
+              <input type="date"
+                  class="form-control" 
+                  formControlName="fecha"
+                  [ngModel]='date | date:"yyyy-MM-dd" '
+                  (ngModelChange)='date=$event'>                  
+          </div> 
+            <div class="form-group">
+                <label for="" style="color:red">*</label>
+                    <input type="number"
+                           class="form-control" 
+                           formControlName="cantidad_ponedoras" 
+                           placeholder="Cantidad de ponedoras">
+            </div>
+             <div class="form-group">
+              <label for="" style="color:red">*</label>
+                  <input type="number"
+                          class="form-control" 
+                          formControlName="alimento" 
+                          placeholder="Cantidad de alimento x unidad">
+             </div> 
+            
+            <div class="form-group">
+              <label for="" class="text-white" >vermifumigaciones</label>
+                  <input type="number"
+                           class="form-control" 
+                           formControlName="vermifumigaciones" 
+                           placeholder="vermifumigaciones y tratamientos">
+            
+          </div>
+          <div class="form-group">
+            <label for="" class="text-white" >observaciones</label>
+            <textarea name="textarea"
+                   placeholder="observaciones" 
+                   rows="6" 
+                   cols="50"
+                   class="form-control" 
+                   formControlName="observaciones">           
+         </textarea>
+          </div>
+     
+  </section>
+  <section class="huevos text-center">
+    <h6>Cantidad de huevos del lote</h6>
+       <div class="card text-center" style="align-items: center;">
+         lunes
+          <input type="text"
+            class="form-control" 
+            formControlName="lunes" 
+            placeholder="">
+       </div>
+       <div class="card text-center" style="align-items: center;">
+        Martes
+         <input type="text"
+           class="form-control" 
+           formControlName="martes" 
+           placeholder="">
+      </div>
+      <div class="card text-center" style="align-items: center;">
+        Miercoles
+         <input type="text"
+           class="form-control" 
+           formControlName="miercoles" 
+           placeholder="">
+      </div>
+      <div class="card text-center" style="align-items: center;">
+        Jueves
+         <input type="text"
+           class="form-control" 
+           formControlName="jueves" 
+           placeholder="">
+      </div>
+      <div class="card text-center" style="align-items: center;">
+        Viernes
+         <input type="text"
+           class="form-control" 
+           formControlName="viernes" 
+           placeholder="">
+      </div>
+      <div class="card text-center" style="align-items: center;">
+        Sabado
+         <input type="text"
+           class="form-control" 
+           formControlName="sabado" 
+           placeholder="">
+      </div>
+      <div class="card text-center" style="align-items: center;">
+        Domingo
+         <input type="text"
+           class="form-control" 
+           formControlName="domingo" 
+           placeholder="">
+      </div>
+      
+  </section>
+     
+     
+</div>
+<div class="modal-footer">
+  <button [disabled]="formGallina.invalid" type="submit" class="btn btn-danger" >
+      <i class="fas fa-plus-circle"></i> registrar
+  </button>
+  
+
+  <!-- <button type="reset" class="btn btn-info" 
+          (click)="resetForm(polloForm)" style="margin-top: 10px; margin-left: 3px; ">
+      <i class="fas fa-eraser"></i>Borrar selección
+  </button> -->
+  
+  </div>
+     </form>
+</ng-template>
+<!-- --------------------------Modal para gallinas------------------------------------- -->
+
+<!-- --------------------------Modal para codornices------------------------------------- -->
+<ng-template #modalCodornices let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Nuevo registro semanal(Codornices)
+        <div *ngIf="loading" class="spinner-border text-danger float-end" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+      </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">x</span>
+      </button>
+    </div>
+    <form [formGroup]="formCodorniz" (ngSubmit)="onSubmitCodorniz()" >
+    <div class="cont" style="padding: 15px; display: flex;">
+    <section class="forms" style="width: 80%; padding: 5px;">    
+          <h6>Los campos con <span style="color:red">*</span>  son  obligatorios</h6> 
+            <div class="form-group">
+              <label for="" >fecha<span style="color:red">*</span></label>
+                <input type="date"
+                    class="form-control" 
+                    formControlName="fecha"
+                    [ngModel]='date | date:"yyyy-MM-dd" '
+                    (ngModelChange)='date=$event'>                  
+            </div> 
+              <div class="form-group">
+                  <label for="" style="color:red">*</label>
+                      <input type="number"
+                             class="form-control" 
+                             formControlName="cantidad_codornices" 
+                             placeholder="Cantidad de codornices">
+              </div>
+               <div class="form-group">
+                <label for="" style="color:red">*</label>
+                    <input type="number"
+                            class="form-control" 
+                            formControlName="alimento" 
+                            placeholder="Cantidad de alimento x unidad">
+               </div> 
+              
+              <div class="form-group">
+                <label for="" class="text-white" >vermifumigaciones</label>
+                    <input type="number"
+                             class="form-control" 
+                             formControlName="vermifumigaciones" 
+                             placeholder="vermifumigaciones y tratamientos">
+              
+            </div>
+            <div class="form-group">
+              <label for="" class="text-white" >observaciones</label>
+              <textarea name="textarea"
+                     placeholder="observaciones" 
+                     rows="6" 
+                     cols="50"
+                     class="form-control" 
+                     formControlName="observaciones">           
+           </textarea>
+            </div>
+       
+    </section>
+    <section class="huevos text-center">
+      <h6>Cantidad de huevos del lote</h6>
+         <div class="card text-center" style="align-items: center;">
+           lunes
+            <input type="text"
+              class="form-control" 
+              formControlName="lunes" 
+              placeholder="">
+         </div>
+         <div class="card text-center" style="align-items: center;">
+          Martes
+           <input type="text"
+             class="form-control" 
+             formControlName="martes" 
+             placeholder="">
+        </div>
+        <div class="card text-center" style="align-items: center;">
+          Miercoles
+           <input type="text"
+             class="form-control" 
+             formControlName="miercoles" 
+             placeholder="">
+        </div>
+        <div class="card text-center" style="align-items: center;">
+          Jueves
+           <input type="text"
+             class="form-control" 
+             formControlName="jueves" 
+             placeholder="">
+        </div>
+        <div class="card text-center" style="align-items: center;">
+          Viernes
+           <input type="text"
+             class="form-control" 
+             formControlName="viernes" 
+             placeholder="">
+        </div>
+        <div class="card text-center" style="align-items: center;">
+          Sabado
+           <input type="text"
+             class="form-control" 
+             formControlName="sabado" 
+             placeholder="">
+        </div>
+        <div class="card text-center" style="align-items: center;">
+          Domingo
+           <input type="text"
+             class="form-control" 
+             formControlName="domingo" 
+             placeholder="">
+        </div>
+        
+    </section>
+       
+       
+  </div>
+  <div class="modal-footer">
+    <button  [disabled]="formCodorniz" type="submit" class="btn btn-danger" >
+        <i class="fas fa-plus-circle"></i> registrar
+    </button>
+    
+  
+    <!-- <button type="reset" class="btn btn-info" 
+            (click)="resetForm(polloForm)" style="margin-top: 10px; margin-left: 3px; ">
+        <i class="fas fa-eraser"></i>Borrar selección
+    </button> -->
+    
+    </div>
+       </form>
+  </ng-template>
+<!-- --------------------------Modal para codornices------------------------------------- -->

@@ -1,12 +1,15 @@
 <div class="flex-container"  >
         <div class="formulario" >
-            <div class="header text-white" style="text-align: center;">
-                <i class="fas fa-arrow-circle-left" 
-                    style="float: left; cursor: pointer;" 
+            <div class="header text-white" >               
+                <h1>  
+                    <i class="fas fa-arrow-circle-left" 
+                    style="float: left; cursor: pointer; font-size: small;" 
                     routerLinkActive="active" routerLink="../ingreso"  
-                    [routerLinkActiveOptions]="{exact: true}">volver 
-                </i>
-                <h1 >Registro de Visitantes</h1>
+                    [routerLinkActiveOptions]="{exact: true}">
+                    volver 
+                    </i>
+                     Registro de Visitantes
+                </h1>
             </div>
             <form #visitanteForm="ngForm" (ngSubmit)="onSubmit(visitanteForm)"  >
                 <input hidden  name="$key" #$key="ngModel" [(ngModel)]="visitanteService.selectedVisitante.$key"> 

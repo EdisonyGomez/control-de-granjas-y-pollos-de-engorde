@@ -8,18 +8,18 @@
 
     <header>
         <!-- <div class="row"> -->
-            <div class="col-sm-3 icon__menu">
+            <div class="icon__menu">
                 <i class="fas fa-bars" id="btn_open"></i>
             </div>
-            <div class="col-sm-4 titulo" id="finca">
+            <div class="titulo" id="finca">
                 <h1>Finca San Pablo</h1><br>
             </div>
-            <div class="col-sm-2">
+            <!-- <div class="float-end" style="float: left; cursor:pointer;border:solid"> -->
             <!-- CERRAR SESION -->
-            <span class="cerrar-sesion" style="float: right; cursor:pointer;" (click)="autenticacionService.SignOut()">
+            <span class="cerrar-sesion " style="float: left; cursor:pointer;border:solid" (click)="autenticacionService.SignOut()">
                 <i class="fas fa-sign-out-alt"></i>cerrar sesión
             </span>
-            </div>                
+            <!-- </div>                 -->
         <!-- </div> -->
     </header>
     <!-- BARRA LATERAL -->

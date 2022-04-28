@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 
 //class
 import { Pollo } from 'src/app/models/pollo';
+import { Gallina } from './../../../models/gallina';
+
 
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +14,7 @@ import { GalponService } from 'src/app/services/galpones/galpon.service';
 //service
 import { VisitanteService } from 'src/app/services/visitantes/visitante.service';
 import { group } from 'console';
+import { Codorniz } from 'src/app/models/codorniz';
 
 
 
@@ -24,18 +27,21 @@ import { group } from 'console';
 export class AdministracionComponent implements OnInit {
   closeResult: string = '';
    date=new Date();
-
-   form: FormGroup;
+   
+   formPollo: FormGroup;
+   formGallina: FormGroup;
+   formCodorniz :FormGroup;
    loading = false;
-
-  constructor(public polloService:GalponService,
+   boton_enviar = false;
+   
+  constructor(public galponService:GalponService,
               private modalService: NgbModal, 
               private toastr: ToastrService,    
               public datepipe: DatePipe,
               private fb: FormBuilder,
               public visitanteService:VisitanteService) {
                 
-                this.form = this.fb.group({
+                this.formPollo = this.fb.group({
                   numero_galpon: ['', Validators.required],
                   numero_pollos: ['', Validators.required],
                   peso_sacrificio: ['', ],
@@ -45,58 +51,117 @@ export class AdministracionComponent implements OnInit {
                   fecha_egreso: ['', ],
                   observaciones: ['', ],                  
                 })
+                this.formGallina = this.fb.group({
+                  fecha: ['', Validators.required],
+                  cantidad_ponedoras: ['', Validators.required],
+                  alimento: ['', ],
+                  vermifumigaciones: ['', ],
+                  observaciones: ['', ],
+                  lunes: ['', ],
+                  martes: ['', ],
+                  miercoles: ['', ],   
+                  jueves: ['', ],   
+                  viernes: ['', ],                  
+                  sabado: ['', ],                  
+                  domingo: ['', ], 
+                })
+                this.formCodorniz = this.fb.group({
+                  fecha: ['', Validators.required],
+                  cantidad_codornices: ['', Validators.required],
+                  alimento: ['', ],
+                  vermifumigaciones: ['', ],
+                  observaciones: ['', ],
+                  lunes: ['', ],
+                  martes: ['', ],
+                  miercoles: ['', ],   
+                  jueves: ['', ],   
+                  viernes: ['', ],                  
+                  sabado: ['', ],                  
+                  domingo: ['', ], 
+                })
               }
 
   ngOnInit(): void {
     this.datepipe.transform(this.date,"dd-MM-yyyy");
-     this.polloService.getpollo();
-    this.resetForm() ;
+    //  this.galponService.getpollo();
   }
 
 
-  resetForm(polloForm?: NgForm){
-    if (polloForm != null)
-    polloForm.reset ();
-    // this.polloService.selectedPollo = new Pollo();
-}
-resetForm2(form?: FormGroup){
-  if (form != null)
-  form.reset ();
-}
-  onSubmit2(){
+
+//llamado al servicio e insercion de datos
+  onSubmitPollo(){
     const pollo: Pollo ={
-      numero_galpon: this.form.value.numero_galpon,
-      numero_pollos: this.form.value.numero_pollos,
-      peso_sacrificio: this.form.value.peso_sacrificio,
-      muerte_pre_sacrificio: this.form.value.muerte_pre_sacrificio,
-      medicamentos: this.form.value.medicamentos,
-      fecha_ingreso: this.form.value.fecha_ingreso,
-      fecha_egreso: this.form.value.fecha_egreso,
-      observaciones: this.form.value.observaciones
+      numero_galpon: this.formPollo.value.numero_galpon,
+      numero_pollos: this.formPollo.value.numero_pollos,
+      peso_sacrificio: this.formPollo.value.peso_sacrificio,
+      muerte_pre_sacrificio: this.formPollo.value.muerte_pre_sacrificio,
+      medicamentos: this.formPollo.value.medicamentos,
+      fecha_ingreso: this.formPollo.value.fecha_ingreso,
+      fecha_egreso: this.formPollo.value.fecha_egreso,
+      observaciones: this.formPollo.value.observaciones
     }
     this.loading =true;
-    this.polloService.guardarPollo(pollo).then(()=> {
+    this.galponService.guardarPollo(pollo).then(()=> {
        this.loading=false; 
-      this.toastr.success('Galpón creado satisfatoriamente', 'Operación completada'); 
-      this.resetForm2(this.form);
+       this.toastr.success('Galpón creado satisfatoriamente', 'Operación completada'); 
+       this.formPollo.reset();
     }, error => {
        this.loading=false; 
-
-    this.toastr.error(error, 'algo pasó');
+       this.toastr.error(error, 'algo pasó');
+    })
+  }
+  
+  onSubmitGallina(){
+    const gallina: Gallina ={
+      fecha: this.formGallina.value.fecha,
+      cantidad_ponedoras: this.formGallina.value.cantidad_ponedoras,
+      alimento: this.formGallina.value.alimento,
+      vermifumigaciones: this.formGallina.value.vermifumigaciones,
+      observaciones: this.formGallina.value.observaciones,
+      lunes: this.formGallina.value.lunes,
+      martes: this.formGallina.value.martes,
+      miercoles: this.formGallina.value.miercoles,
+      jueves: this.formGallina.value.jueves,
+      viernes: this.formGallina.value.viernes,
+      sabado: this.formGallina.value.sabado,
+      domingo: this.formGallina.value.domingo
+    }
+    this.loading =true;
+    this.galponService.insertarGallina(gallina).then(()=> {
+       this.loading=false; 
+       this.toastr.success('Registro guardado satisfatoriamente', 'Operación completada'); 
+       this.formGallina.reset();
+    }, error => {
+       this.loading=false; 
+       this.toastr.error(error, 'algo pasó');
+    })
+  }
+  onSubmitCodorniz(){
+    const codorniz: Codorniz ={
+      fecha: this.formCodorniz.value.fecha,
+      cantidad_codornices: this.formCodorniz.value.cantidad_codornices,
+      alimento: this.formCodorniz.value.alimento,
+      vermifumigaciones: this.formCodorniz.value.vermifumigaciones,
+      observaciones: this.formCodorniz.value.observaciones,
+      lunes: this.formCodorniz.value.lunes,
+      martes: this.formCodorniz.value.martes,
+      miercoles: this.formCodorniz.value.miercoles,
+      jueves: this.formCodorniz.value.jueves,
+      viernes: this.formCodorniz.value.viernes,
+      sabado: this.formCodorniz.value.sabado,
+      domingo: this.formCodorniz.value.domingo
+    }
+    this.loading =true;
+    this.galponService.insertarCodorniz(codorniz).then(()=> {
+       this.loading=false; 
+       this.toastr.success('Registro guardado satisfatoriamente', 'Operación completada'); 
+       this.formCodorniz.reset();
+    }, error => {
+       this.loading=false; 
+       this.toastr.error(error, 'algo pasó');
     })
   }
 
-onSubmit(polloForm: NgForm): void {
-  if(polloForm.value.$key == ""){
-    this.polloService.insertpollo(polloForm.value);
-    this.toastr.success('Galpón creado satisfatoriamente', 'Operación completada');
-    this.resetForm(polloForm) ;
-  }else{
-   this.polloService.updatepollo(polloForm.value) ;
-   this.toastr.success('Datos actualizados', 'Operación completada');
-   this.resetForm(polloForm) ;
-  }
-}
 
 
   open(content:any) {
@@ -105,8 +170,6 @@ onSubmit(polloForm: NgForm): void {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-    this.resetForm() ;
-
   } 
     
   /**

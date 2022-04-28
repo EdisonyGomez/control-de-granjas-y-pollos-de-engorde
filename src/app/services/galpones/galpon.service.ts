@@ -1,15 +1,15 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/internal/Subject';
 
 //firebase
-import { AngularFireDatabase,  AngularFireList } from '@angular/fire/compat/database';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
-import { Subject } from 'rxjs/internal/Subject';
 
 //clases
 import { Pollo } from '../../models/pollo';
+import { Gallina } from './../../models/gallina';
+import { Codorniz } from 'src/app/models/codorniz';
 
-import { Vehiculo } from './../../models/vehiculo';
 
 @Injectable({
   providedIn: 'root'
@@ -19,85 +19,49 @@ export class GalponService {
  //POLLO
 private pollo$ = new Subject<any>();
 
- polloList!: AngularFireList<any>;
- selectedPollo: Pollo ;
-// selectedPollo: Pollo ;
- 
- //VEHICULO
- vehiculoList!: AngularFireList<any>;
- selectedVehiculo: Vehiculo = new Vehiculo();
+//GALLINA
+private gallina$ = new Subject<any>();
 
- constructor(private firebase: AngularFireDatabase,
-             private fir: AngularFirestore ) { }
+//CODORNIZ
+private codorniz$ = new Subject<any>();
 
+ constructor(private fir: AngularFirestore ) { }
 
-
-//-----------------------------------------------------------------
-  //Get pollo con Realtime database
-  getpollo(){
-    return  this.polloList = this.firebase.list('pollos');
-   }
 
   //Get pollo con firestore database
-  getPollo2(): Observable<any>{
-    return this.fir.collection('pollos', ref => ref.orderBy('fecha_ingreso','asc')).snapshotChanges();
+    getPollo2(): Observable<any>{
+      return this.fir.collection('pollos', ref => ref.orderBy('fecha_ingreso','desc')).snapshotChanges();
     }
       
 
+  //Get gallina
+    getGallina(): Observable<any>{
+      return this.fir.collection('gallinas', ref => ref.orderBy('fecha','desc')).snapshotChanges();
+    }
 
-  //Get vehiculo
-  getvehiculo(){
-    return  this.vehiculoList = this.firebase.list('vehiculos');
-   }
+     //Get codorniz
+    getCodorniz(): Observable<any>{
+      return this.fir.collection('codornices', ref => ref.orderBy('fecha','desc')).snapshotChanges();
+    }
 //-----------------------------------------------------------------
-
- //Insertar pollo con Realtime database
-   insertpollo(pollo: Pollo){
-    this.polloList.push({      
-      numero_galpon: pollo.numero_galpon,
-      numero_pollos: pollo.numero_pollos,
-      peso_sacrificio: pollo.peso_sacrificio,
-      muerte_pre_sacrificio: pollo.muerte_pre_sacrificio,
-      medicamentos: pollo.medicamentos,
-      fecha_ingreso: pollo.fecha_ingreso,
-      fecha_egreso: pollo.fecha_egreso,
-      observaciones: pollo.observaciones      
-     });
-   }
 
  //Insertar pollo con firestore database
    guardarPollo(pollo:Pollo): Promise<any>{
     return this.fir.collection('pollos').add(pollo);
     }
       
-   //Insertar vehiculo
-   insertvehiculo(vehiculo: Vehiculo){
-    this.vehiculoList.push({
+ //Insertar gallina con firestore database
+   insertarGallina(gallina:Gallina): Promise<any>{
+    return this.fir.collection('gallinas').add(gallina);
+    }
 
-      placa: vehiculo.placa,      
-      nombre_propietario: vehiculo.nombre_propietario,
-      apellido_propietario: vehiculo.apellido_propietario 
-     
-    });
-  }
+ //Insertar codorniz con firestore database
+   insertarCodorniz(codorniz:Codorniz): Promise<any>{
+    return this.fir.collection('codornices').add(codorniz);
+    }
  //-----------------------------------------------------------------
- //Actualizar pollo
-   updatepollo(pollo: Pollo){
 
-       this.polloList.update(pollo.id,{
-        numero_galpon: pollo.numero_galpon,
-        numero_pollos: pollo.numero_pollos,
-        peso_sacrificio: pollo.peso_sacrificio,
-        muerte_pre_sacrificio: pollo.muerte_pre_sacrificio,
-        medicamentos: pollo.medicamentos,
-        fecha_ingreso: pollo.fecha_ingreso,
-        fecha_egreso: pollo.fecha_egreso,
-        observaciones: pollo.observaciones
-         });
-         
-   }
-
-   //actualizar con firestore
+   //actualizar pollo con firestore
    addPolloEdit(pollo: Pollo){
      this.pollo$.next(pollo);
    }
@@ -110,28 +74,29 @@ private pollo$ = new Subject<any>();
     return  this.fir.collection('pollos').doc(id).update(pollo);
   }
 
-   //Actualizar Vehiculo
-//    updatevehiculo(vehiculo: Vehiculo){
-//     this.vehiculoList.update(vehiculo.id,{
-//       placa: vehiculo.placa,      
-//       nombre_propietario: vehiculo.nombre_propietario,
-//       apellido_propietario: vehiculo.apellido_propietario 
-//       });
-// }
-//-----------------------------------------------------------------
-//Eliminar pollo con realtime database
-   deletepollo(id:string){
-     this.polloList.remove(id);
-   }
-   
- //Insertar pollo con firestore database
- eliminiarPollo(id: string): Promise<any>{
-  return this.fir.collection('pollos').doc(id).delete();
+   //actualizar gallina con firestore
+   addGallinaEdit(gallina: Gallina){
+    this.gallina$.next(gallina);
   }
 
-//Eliminar vehiculo
-  deletevehiculo(id:string){
-    this.vehiculoList.remove(id);
+  getGallinaEdit(): Observable<Gallina>{
+    return this.gallina$.asObservable();
+  }
+
+  updateGallina(id: string ,gallina: any): Promise<any>{
+   return  this.fir.collection('gallinas').doc(id).update(gallina);
+ }
+//-----------------------------------------------------------------
+
+   
+ //TODO: Eliminar pollo con firestore database
+  eliminiarPollo(id: string): Promise<any>{
+    return this.fir.collection('pollos').doc(id).delete();
+  }
+
+//Eliminar gallina con firestore database
+  eliminiarGallina(id:string){
+    return this.fir.collection('gallinas').doc(id).delete();
   }  
 //-----------------------------------------------------------------
 

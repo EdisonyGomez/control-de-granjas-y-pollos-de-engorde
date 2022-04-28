@@ -18,6 +18,24 @@ body{
 
 }
 
+h1{
+  cursor: default;
+  /* position: absolute; */
+  /* top: 30px; */
+  /* left: 0;
+  right: 0;
+  bottom: 0; */
+  /* height: 100px; */
+  /* margin: auto;
+  display: block; */
+  /* -webkit-animation: bounce 0.3s ease infinite alternate; */
+  /* font-family: "Erica One", cursive; */
+  font-size: 40px;
+  color: rgb(11, 11, 11);
+  /* text-align: center; */
+  /* line-height: 100px; */
+  text-shadow: 0 1px 0 #CCC, 0 2px 0 #CCC, 0 3px 0 #CCC, 0 4px 0 #CCC, 0 5px 0 #CCC, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent, 0 9px 0 transparent, 0 10px 10px rgba(0, 0, 0, 0.6);
+}
 
 
 header{
@@ -29,10 +47,12 @@ header{
     position: fixed;
     top: 0;
     z-index: 200;
+    justify-content: space-between;
+
 }
-.titulo{
-  margin-left: 150px;
-  margin-top: 15px;
+.titulo {
+     margin-left: -170px;
+
 }
 
 .icon__menu{
@@ -171,9 +191,12 @@ a.selected{
 
 /* RESPONSIVE */
 @media screen and (max-width: 600px) {
-  body{
+  /* body{
     margin-left: -250px;
 
+  } */
+ .titulo{
+    font-size: 13px !important;
   }
 }
 
@@ -190,21 +213,21 @@ a.selected{
   
 /* Para 600px */  
 @media only screen and (max-width: 620px) and (min-width: 501px) {  
-  body{
+  /* body{
     margin-left: -250px;
 
-  }
+  } */
 }  
   
 /* Para 480px */  
-@media only screen and (max-width: 500px) and (min-width: 341px) {  
+@media  screen and (max-width: 500px) and (min-width: 341px) {  
   header .titulo{
     font-size: 13px;
   }
-  body{
+  /* body{
     margin-left: -250px;
 
-  }
+  } */
 }  
   
 /* Para 320px */  
@@ -212,10 +235,10 @@ a.selected{
   header{
     font-size: 10px;
   } 
-  body{
+  /* body{
     margin-left: -250px;
 
-  }
+  } */
   
 } 
 
@@ -234,6 +257,9 @@ a.selected{
 
 
 @media screen and (max-width: 760px){
+  .titulo h1{
+    font-size: 13px;
+  }
   .body_move{
       margin-left: 0px;
   }

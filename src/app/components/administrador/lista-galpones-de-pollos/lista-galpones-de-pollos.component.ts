@@ -91,9 +91,7 @@ export class ListaGalponesDePollosComponent implements OnInit {
   }
 
 
-  onEdit(pollo: Pollo) {
-    this.polloService.selectedPollo = Object.assign({}, pollo);
-  }
+ 
 
   //Metodo para editar un galpon de pollos usando firestore database
   onEdit2(pollo: Pollo) {
@@ -123,11 +121,6 @@ export class ListaGalponesDePollosComponent implements OnInit {
   }
 
 
-  //Metodo para eliminar un galpon de pollos usando realtime database
-  onDelete(id: string) {
-    this.polloService.deletepollo(id);
-    this.toastr.success('Galpón eliminado satisfatoriamente', 'Operación completada');
-  }
 
   //Metodo para eliminar un galpon de pollos usando firestore database
   onDelete2(id: string) {
