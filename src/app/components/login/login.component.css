@@ -8,21 +8,32 @@ body{
   z-index: 10;
 }
 .displayTable{
-    box-shadow: 0 8px 17px 2px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%), 0 5px 5px -3px rgb(0 0 0 / 20%);
-    border-radius: 10px;
+ 
+
     text-align: center;
-    /* justify-content: center; */
+    z-index:9;
     width: 300px;
     height: 400px;
-    background-color: aliceblue;
-    z-index:9;
-    opacity:0.9;
-    padding: 1.25rem
+
+    background: rgba( 255, 255, 255, 0.5 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.displayTableCell{
+    padding: 1.25rem;
 
 }
+
+/* box-shadow: 0 8px 17px 2px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%), 0 5px 5px -3px rgb(0 0 0 / 20%);
+border-radius: 10px;
+background-color: aliceblue;
+opacity:0.9; */
 .or-container {
     align-items: center;
-    color: rgb(124, 118, 118);
+    color: rgb(254, 252, 252);
     display: flex;
     margin: 10px 0
 }
@@ -47,31 +58,66 @@ body{
     border-bottom: 1px solid #ccc;
     margin-top:2px;
 }
+h3{
+  width: 100%;
+  /* background-color: #f35b5b; */
+  border-radius: 10px;
+  background: rgba( 243, 91, 91, 0.5 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 1px );
+-webkit-backdrop-filter: blur( 1px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.btn-iniciar{
+  background-color: #f35b5b;
+  color: white;
+}
 .or-label {
     flex-grow: 1;
     /* margin: 0 15px; */
     text-align: center
 }
 .btn-google {
-    size: 14px;
-    font: Roboto-Medium;
-    color: #000000;
-    background-color: #ffffff;
-    box-shadow: 0 1px 2px 1px #ddd
+  display: inline-block;
+  background: white;
+  /* color: #444; */
+  /* width: 190px; */
+  /* border-radius: 5px; */
+  border: thin solid #888;
+  box-shadow: 1px 1px 1px grey;
+  white-space: nowrap;
+  height: 38px;
 }
-.form-group {
-    margin-bottom:   1.05em
-  }
-  
+span.icon {
+  background: url("../../../assets/img/btn_google.png") transparent 5px 50% no-repeat;;
+  display: inline-block;
+  vertical-align: middle;
+  width: 42px;
+  height: 42px;
+  background-size: 100% 100%;
+  margin-left: -21px;
+  margin-top: -8px;
+}
+span.buttonText {
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -5px;
+  font-size: 14px;
+  font-weight: bold;
+  /* Use the Roboto font that is loaded in the <head> */
+  font-family: 'Roboto', sans-serif;
+}
+
+
 
   .forgotPassword{
       cursor: pointer;
   }
+  .redirectToLogin{
+    cursor: pointer;
+  }
 
-  
-/* .password-icon {
-  
-} */
 
 
   /*Barra de formularios material desing ================*/
@@ -82,7 +128,7 @@ body{
   width:0;
   bottom:1px; 
   position:absolute;
-  background:black; 
+  background:rgb(254, 253, 253); 
   transition:all 0.2s ease; 
   -moz-transition:all 0.2s ease; 
   -webkit-transition:all 0.2s ease;
@@ -98,7 +144,7 @@ input.material-login-control:focus ~ .bar-login:before, input.material-login-con
     margin-bottom:25px; 
 }
 .group-material-login label{
-    color: black; 
+    color: rgb(252, 246, 246); 
     font-size:17px;
     font-weight:normal;
     position:absolute;
@@ -118,12 +164,12 @@ input.material-login-control:focus ~ .bar-login:before, input.material-login-con
     display:block;
     width:100%;
     border:none;
-    border-bottom:1px solid black;
+    border-bottom:1px solid rgb(255, 253, 253);
     outline:none;
   }
   .material-login-control:focus{ outline:none; }
   .group-material-login label{
-    color: black; 
+    color: rgb(254, 251, 251); 
     font-size:17px;
     font-weight:normal;
     position:absolute;
@@ -139,7 +185,7 @@ input.material-login-control:focus ~ .bar-login:before, input.material-login-con
   input.material-login-control:valid ~ label{
     top:-18px;
     font-size:13px;
-    color:black;
+    color:rgb(12, 12, 12);
   }
   input.material-login-control:focus:invalid:required,
   input.material-login-control:invalid:required{
@@ -159,7 +205,21 @@ input.material-login-control:focus ~ .bar-login:before, input.material-login-con
   .btn-google {
     width: 150px;  
     font-size: 10px;
+  }
+  .group-material-login {
+    font-size: 10px;
 
+  }
+  .material-control-login{
+    font-size: 10px;
+
+  }
+  input.material-login-control{
+    font-size: 10px;
+
+  }
+  span.buttonText {   
+    font-size: 10px;
   }
   .or-container {
     margin: 0;

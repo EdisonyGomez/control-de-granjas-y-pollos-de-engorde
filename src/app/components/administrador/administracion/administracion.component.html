@@ -135,8 +135,8 @@
 
 
 <!-- --------------------------Modal para gallinas------------------------------------- -->
-<ng-template #modalGallinas let-modal >
-  <div class="modal-header">
+<ng-template #modalGallinas let-modal style="background: greenyellow;">
+  <div class="modal-header text-white">
     <h4 class="modal-title" id="modal-basic-title">Nuevo registro semanal(Ponedoras)
       <div *ngIf="loading" class="spinner-border text-danger float-end" role="status">
           <span class="sr-only">Loading...</span>
@@ -148,8 +148,9 @@
   </div>
   <form [formGroup]="formGallina" (ngSubmit)="onSubmitGallina()" >
   <div class="cont" style="padding: 15px; display: flex;">
-  <section class="forms" style="width: 80%; padding: 5px;">    
+  <section class="forms" style="width: 98%; padding: 5px;">    
         <h6>Los campos con <span style="color:red">*</span>  son  obligatorios</h6> 
+      <div class="flex-container-2" style="padding: 15px;" >
           <div class="form-group">
             <label for="" >fecha<span style="color:red">*</span></label>
               <input type="date"
@@ -191,60 +192,62 @@
                    formControlName="observaciones">           
          </textarea>
           </div>
-     
+      </div>
   </section>
-  <section class="huevos text-center">
+  <section class="huevos text-center" style="align-items: center;border-top:solid 1px; border-radius: 10px;
+                                           ">
     <h6>Cantidad de huevos del lote</h6>
-       <div class="card text-center" style="align-items: center;">
+      <div class="flex-container-2" >
+       <div class="card  contenedor text-center" style="align-items: center;">
          lunes
           <input type="text"
             class="form-control" 
             formControlName="lunes" 
             placeholder="">
        </div>
-       <div class="card text-center" style="align-items: center;">
+       <div class="card contenedor text-center" style="align-items: center;">
         Martes
          <input type="text"
            class="form-control" 
            formControlName="martes" 
            placeholder="">
       </div>
-      <div class="card text-center" style="align-items: center;">
+      <div class="card contenedor text-center" style="align-items: center;">
         Miercoles
          <input type="text"
            class="form-control" 
            formControlName="miercoles" 
            placeholder="">
       </div>
-      <div class="card text-center" style="align-items: center;">
+      <div class="card contenedor text-center" style="align-items: center;">
         Jueves
          <input type="text"
            class="form-control" 
            formControlName="jueves" 
            placeholder="">
       </div>
-      <div class="card text-center" style="align-items: center;">
+      <div class="card contenedor text-center" style="align-items: center;">
         Viernes
          <input type="text"
            class="form-control" 
            formControlName="viernes" 
            placeholder="">
       </div>
-      <div class="card text-center" style="align-items: center;">
+      <div class="card contenedor text-center" style="align-items: center;">
         Sabado
          <input type="text"
            class="form-control" 
            formControlName="sabado" 
            placeholder="">
       </div>
-      <div class="card text-center" style="align-items: center;">
+      <div class="card contenedor text-center" style="align-items: center;">
         Domingo
          <input type="text"
            class="form-control" 
            formControlName="domingo" 
            placeholder="">
       </div>
-      
+    </div>
   </section>
      
      
