@@ -1,6 +1,6 @@
 .flex-container{
     display:flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-content: center;
     flex-wrap: wrap ;
     padding-top: 70px
@@ -30,6 +30,7 @@
     align-items: center;
     padding: 20px;
     transition: 100ms cubic-bezier(0.450, 0.30, 0.55, 0.95);
+    width: 330px;
 }
 
 

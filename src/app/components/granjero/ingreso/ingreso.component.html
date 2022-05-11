@@ -1,13 +1,17 @@
- <div class="flex-container" >
-        <div class="card text-white  bg-danger mb-3" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="../visitantes" style="max-width: 18rem; cursor: pointer; ">
-            <div class="card-body">
-            <h5 class="card-title">Registrar visitantes</h5>
-            </div>         
-        </div>
-      <div class="card text-white bg-danger mb-2" routerLinkActive="active" routerLink="../vehiculos"  [routerLinkActiveOptions]="{exact: true}" style="max-width: 18rem; cursor: pointer;  " >
-        <div class="card-body">
-          <h5 class="card-title">Registrar Vehiculo </h5>
+<div class="container-1">
+  <div class="container-2">
+    <h1 class="texto2">Ingreso a la finca</h1>
+    <div class="flex-container">
+      <div class="card" routerLink="../visitantes">
+        <div class="content">
+          <h2 class="title">Registrar Visitantes</h2>
         </div>
       </div>
-      <router-outlet> </router-outlet>
- </div>
+      <div class="card" routerLink="../vehiculos">
+        <div class="content">
+          <h2 class="title">Registrar Vehiculo</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

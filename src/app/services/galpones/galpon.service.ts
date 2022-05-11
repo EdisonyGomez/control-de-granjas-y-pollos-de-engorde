@@ -86,6 +86,20 @@ private codorniz$ = new Subject<any>();
   updateGallina(id: string ,gallina: any): Promise<any>{
    return  this.fir.collection('gallinas').doc(id).update(gallina);
  }
+
+
+  //actualizar codorniz con firestore
+  addCodornizEdit(codorniz: Codorniz){
+    this.gallina$.next(codorniz);
+  }
+
+  getCodornizEdit(): Observable<Codorniz>{
+    return this.codorniz$.asObservable();
+  }
+
+  updateCodorniz(id: string ,codorniz: any): Promise<any>{
+   return  this.fir.collection('codornices').doc(id).update(codorniz);
+ }
 //-----------------------------------------------------------------
 
    
@@ -98,6 +112,11 @@ private codorniz$ = new Subject<any>();
   eliminiarGallina(id:string){
     return this.fir.collection('gallinas').doc(id).delete();
   }  
+
+  //Eliminar codorniz con firestore database
+  eliminiarCodorniz(id:string){
+    return this.fir.collection('codornices').doc(id).delete();
+  } 
 //-----------------------------------------------------------------
 
 

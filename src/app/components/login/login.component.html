@@ -6,7 +6,7 @@
     <div class="displayTableCell">
       <div class="authBlock">
       
-        <form #loginForm="ngForm" (ngSubmit)="authService.SignIn(userName.value, userPassword.value)"  >
+        <form #loginForm="ngForm" (ngSubmit)="iniciarSesion(userName.value, userPassword.value)"  >
           <div class="form-group form-primary group-material-login text-white">
             <input type="text" class="form-control material-login-control"  #userName required>
             <span class="highlight-login"></span>
@@ -34,7 +34,10 @@
               (click)="authService.SignIn(userName.value, userPassword.value)">
           </div> -->
           <button type="submit" class="btn btn-iniciar">
-            Iniciar sesión
+            Iniciar sesión  
+            <div *ngIf="loading" class="spinner-border float-end" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
           </button>
         </form>
           <div class="or-container">

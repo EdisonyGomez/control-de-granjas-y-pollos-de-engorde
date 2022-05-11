@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr'; 
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -76,7 +76,7 @@ export class ListaGalponesDePollosComponent implements OnInit {
     //   });
     // });
   }
-  //Metodo para listar los gapones con direstore database
+  //Metodo para listar los gapones con firestore database
   showGalponesPollos() {
     this.polloService.getPollo2().subscribe(doc => {
       this.polloList = [];

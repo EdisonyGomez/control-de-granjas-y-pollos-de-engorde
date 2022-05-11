@@ -13,6 +13,9 @@ import { VerificarCorreoComponent } from './components/login/verificar-correo/ve
 import { AdministracionComponent } from './components/administrador/administracion/administracion.component';
 import { RegristrarUsuarioComponent } from './components/login/regristrar-usuario/regristrar-usuario.component';
 import { ListaGalponesDePollosComponent } from './components/administrador/lista-galpones-de-pollos/lista-galpones-de-pollos.component';
+import { PanelAdministracionComponent } from './components/administrador/panel-administracion/panel-administracion.component';
+import { ListaGalponesGallinasComponent } from './components/administrador/lista-galpones-gallinas/lista-galpones-gallinas.component';
+import { ListaGalponesCodornicesComponent } from './components/administrador/lista-galpones-codornices/lista-galpones-codornices.component';
 
 
 // route guard
@@ -39,13 +42,17 @@ const routes: Routes = [
   ...canActivate(redirectUnauthorizedToLogin),
     children:[
         { path: '', component:BarraLateralComponent  },
-        { path: 'admin', component: AdministracionComponent },
+        { path: 'galpones', component: AdministracionComponent },
         { path: 'ingreso', component: IngresoComponent },
         { path: 'vehiculos', component: VehiculosComponent },
         { path: 'visitantes', component: VisitantesComponent },
+        { path: 'admin', component: PanelAdministracionComponent },
         { path: 'pollos', component: ListaGalponesDePollosComponent },
-
-
+        { path: 'ponedoras', component: ListaGalponesGallinasComponent },
+        { path: 'codornices', component: ListaGalponesCodornicesComponent },
+  
+        
+        
     ]},
 
   

@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root'
 })
 export class AutenticacionService {
-
+  
   userData: any; // Save logged in user data
   constructor(
               public afs: AngularFirestore, // Inject Firestore service
@@ -42,7 +42,7 @@ SignIn(email: string, password: string) {
 
   return this.afAuth
   // 
-    .signInWithEmailAndPassword(email, password)    
+    .signInWithEmailAndPassword(email, password) 
     .then((result) => {
       this.ngZone.run(() => {
         this.router.navigate(['granjero']);

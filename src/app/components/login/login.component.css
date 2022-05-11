@@ -193,6 +193,11 @@ input.material-login-control:focus ~ .bar-login:before, input.material-login-con
     box-shadow: none;
   }
 
+  .spinner-border{
+    width: 26px;
+    height: 26px;
+  }
+
 /* RESPONSIVE */
 @media screen and (max-width: 600px) {
   .displayTable{    

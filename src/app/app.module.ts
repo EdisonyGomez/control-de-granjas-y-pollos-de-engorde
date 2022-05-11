@@ -36,7 +36,6 @@ import { VisitanteService } from './services/visitantes/visitante.service';
 import { GalponService } from 'src/app/services/galpones/galpon.service';
 
 
-import { NavBarPrincipalComponent } from './components/elements/nav-bar-principal/nav-bar-principal.component';
 import { VehiculosComponent } from './components/granjero/vehiculos/vehiculos.component';
 import { ListaVehiculosComponent } from './components/granjero/lista-vehiculos/lista-vehiculos.component';
 
@@ -48,6 +47,9 @@ import { AutenticacionService } from './services/autenticacion/autenticacion.ser
 import { IngresoComponent } from './components/granjero/ingreso/ingreso.component';
 import { AdministracionComponent } from './components/administrador/administracion/administracion.component';
 import { ListaGalponesDePollosComponent } from './components/administrador/lista-galpones-de-pollos/lista-galpones-de-pollos.component';
+import { PanelAdministracionComponent } from './components/administrador/panel-administracion/panel-administracion.component';
+import { ListaGalponesGallinasComponent } from './components/administrador/lista-galpones-gallinas/lista-galpones-gallinas.component';
+import { ListaGalponesCodornicesComponent } from './components/administrador/lista-galpones-codornices/lista-galpones-codornices.component';
 
 
 
@@ -55,7 +57,6 @@ import { ListaGalponesDePollosComponent } from './components/administrador/lista
   declarations: [
     AppComponent,
     GranjeroComponent,
-    NavBarPrincipalComponent,
     BarraLateralComponent,
     VisitantesComponent,
     ListaVisitantesComponent,
@@ -67,7 +68,10 @@ import { ListaGalponesDePollosComponent } from './components/administrador/lista
     RegristrarUsuarioComponent,
     IngresoComponent,
     AdministracionComponent,
-    ListaGalponesDePollosComponent
+    ListaGalponesDePollosComponent,
+    PanelAdministracionComponent,
+    ListaGalponesGallinasComponent,
+    ListaGalponesCodornicesComponent
   ],
   imports: [
     NgxPaginationModule,

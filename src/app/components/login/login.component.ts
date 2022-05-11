@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 //service
 import { AutenticacionService } from 'src/app/services/autenticacion/autenticacion.service';
@@ -10,13 +11,28 @@ import { AutenticacionService } from 'src/app/services/autenticacion/autenticaci
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public authService: AutenticacionService ) { 
+  loading = false;
+
+  constructor(public authService: AutenticacionService,
+              private toastr: ToastrService ) { 
     this.loadScripts();
+    // this.loading = authService.loading;
   }
 
   ngOnInit(): void {
   }
 
+  iniciarSesion(email:string, password:string){
+    this.loading=true;
+    this.authService.SignIn(email,password).then(() => {
+      this.loading = false;
+      
+    }, error => {
+      this.loading = false;
+    })
+  }
+
+  
   loadScripts() {
     const dynamicScripts = [
      'assets/js/login.js'

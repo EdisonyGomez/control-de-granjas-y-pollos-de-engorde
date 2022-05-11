@@ -27,6 +27,7 @@
             <h5 class="card-title">&nbsp; Registro de codornices</h5>               
           </div>
         </div>
+        
   <router-outlet> </router-outlet>
 </div> 
   <!-- -------------------------------------------------------------------------- -->
@@ -135,7 +136,7 @@
 
 
 <!-- --------------------------Modal para gallinas------------------------------------- -->
-<ng-template #modalGallinas let-modal style="background: greenyellow;">
+<ng-template #modalGallinas let-modal >
   <div class="modal-header text-white">
     <h4 class="modal-title" id="modal-basic-title">Nuevo registro semanal(Ponedoras)
       <div *ngIf="loading" class="spinner-border text-danger float-end" role="status">
@@ -167,7 +168,7 @@
                            placeholder="Cantidad de ponedoras">
             </div>
              <div class="form-group">
-              <label for="" style="color:red">*</label>
+              <label for="" ></label>
                   <input type="number"
                           class="form-control" 
                           formControlName="alimento" 
@@ -198,49 +199,49 @@
                                            ">
     <h6>Cantidad de huevos del lote</h6>
       <div class="flex-container-2" >
-       <div class="card  contenedor text-center" style="align-items: center;">
+       <div class="card   text-center" style="align-items: center;">
          lunes
           <input type="text"
             class="form-control" 
             formControlName="lunes" 
             placeholder="">
        </div>
-       <div class="card contenedor text-center" style="align-items: center;">
+       <div class="card  text-center" style="align-items: center;">
         Martes
          <input type="text"
            class="form-control" 
            formControlName="martes" 
            placeholder="">
       </div>
-      <div class="card contenedor text-center" style="align-items: center;">
+      <div class="card  text-center" style="align-items: center;">
         Miercoles
          <input type="text"
            class="form-control" 
            formControlName="miercoles" 
            placeholder="">
       </div>
-      <div class="card contenedor text-center" style="align-items: center;">
+      <div class="card  text-center" style="align-items: center;">
         Jueves
          <input type="text"
            class="form-control" 
            formControlName="jueves" 
            placeholder="">
       </div>
-      <div class="card contenedor text-center" style="align-items: center;">
+      <div class="card  text-center" style="align-items: center;">
         Viernes
          <input type="text"
            class="form-control" 
            formControlName="viernes" 
            placeholder="">
       </div>
-      <div class="card contenedor text-center" style="align-items: center;">
+      <div class="card  text-center" style="align-items: center;">
         Sabado
          <input type="text"
            class="form-control" 
            formControlName="sabado" 
            placeholder="">
       </div>
-      <div class="card contenedor text-center" style="align-items: center;">
+      <div class="card  text-center" style="align-items: center;">
         Domingo
          <input type="text"
            class="form-control" 
@@ -300,7 +301,7 @@
                              placeholder="Cantidad de codornices">
               </div>
                <div class="form-group">
-                <label for="" style="color:red">*</label>
+                <label for="" ></label>
                     <input type="number"
                             class="form-control" 
                             formControlName="alimento" 
