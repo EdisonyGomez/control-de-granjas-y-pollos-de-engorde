@@ -39,14 +39,11 @@ h1 {
   position: relative;
   padding: 3rem 2rem;
   border-radius: 6px;
-  /* background: url("../../../../assets/img/pollos2.jpg") no-repeat; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   box-shadow: 0px 0px 20px 0px rgba(95, 140, 191, 0.9);
-  /* height: 200px; */
-  border: solid;
   width: 200px;
   height: 180px;
   margin: 5px;

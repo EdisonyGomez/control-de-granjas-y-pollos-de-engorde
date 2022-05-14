@@ -1,37 +1,88 @@
-<div class="flex-container">
+<div class="container">
     <div class="card">
         <div class="header text-white" style="text-align: center;">
-            <h1>Lista de Galpones de ponedoras </h1>
+            <h1>Galpon de ponedoras </h1>
         </div>
-        <div class="table-container text-center"  style="font-size: smaller;">
-            <table class="table table-responsive-md table-sm table-hover">
-                <tbody>
-                    <tr>
-                        <td>Fecha</td>
-                        <td>Cantidad de ponedoras  </td>
-                        <td>Alimento x unidad</td>
-                        <td>Vermifumigaciones</td>
-                        
-                    </tr>
-                    <tr *ngFor="let gallina of gallinaList |paginate: { itemsPerPage:3, currentPage: page }">
-                        <td>{{gallina.fecha}}</td>
-                        <td>{{gallina.cantidad_ponedoras}}</td>
-                        <td>{{gallina.alimento}}</td>
-                        <td>{{gallina.vermifumigaciones}}</td>
-                       
-                        <td>
-                            <!-- <a class="btn btn-sm btn-secondary" (click)="onEdit2(gallina) " (click)="open(mymodal)"  >
+        <div class="container-2" *ngFor="let gallina of gallinaList |paginate: { itemsPerPage:2, currentPage: page }">
+            <div class="container-3">
+                <div class="cont-2">
+                    <div class="form-group">
+                        <label for="">Fecha:<span class="text-white"></span></label>
+                        <input type="date" class="form-control" value="{{gallina.fecha}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Cant de ponedoras:</label>
+                        <input type="number" class="form-control" value="{{gallina.cantidad_ponedoras}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Alimento x unidad:</label>
+                        <input type="number" class="form-control" value="{{gallina.alimento}}">
+                    </div>
+                </div>
+                <div class="cont-2">
+                    <div class="form-group">
+                        <label for="">Vermifumigaciones:</label>
+                        <!-- <input type="number" class="form-control" value="{{gallina.vermifumigaciones}}"> -->
+                        <textarea placeholder="observaciones" rows="3" class="form-control"
+                            value="{{gallina.vermifumigaciones}}">
+                        </textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Observaciones:</label>
+                        <textarea placeholder="observaciones" rows="3" class="form-control"
+                            value="{{gallina.observaciones}}">
+                        </textarea>
+                    </div>
+                </div>               
+            </div>
+            <div>
+                <h6 class="text-center">Cantidad de huevos del lote</h6>
+                <div class="container-4">
+                    <div class="cont-1">
+                        <div class="card2   text-center" style="align-items: center;">
+                            lunes
+                            <input type="text" class="form-control" value="{{gallina.lunes}}">
+                        </div>
+                        <div class="card2 text-center" style="align-items: center;">
+                            Martes
+                            <input type="text" class="form-control" value="{{gallina.martes}}">
+                        </div>
+                        <div class="card2 text-center" style="align-items: center;">
+                            Miercoles
+                            <input type="text" class="form-control" value="{{gallina.miercoles}}">
+                        </div>
+                    </div>
+                    <div class="cont-1">
+                        <div class="card2 text-center" style="align-items: center;">
+                            Jueves
+                            <input type="text" class="form-control" value="{{gallina.jueves}}">
+                        </div>
+                        <div class="card2 text-center" style="align-items: center;">
+                            Viernes
+                            <input type="text" class="form-control" value="{{gallina.viernes}}">
+                        </div>
+                        <div class="card2 text-center" style="align-items: center;">
+                            Sabado
+                            <input type="text" class="form-control" value="{{gallina.sabado}}">
+                        </div>
+                    </div>
+                    <div class="card2 text-center" style="align-items: center;">
+                        Domingo
+                        <input type="text" class="form-control" value="{{gallina.domingo}}">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- <a class="btn btn-sm btn-secondary" (click)="onEdit2(gallina) " (click)="open(mymodal)"  >
                                 <i class="far fa-edit"></i>    editar
                             </a> -->
-                            
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <pagination-controls 
-                                (pageChange)="page = $event"
-                                previousLabel="Anterior"
-                                nextLabel="Siguiente">
+        <div class="card-footer">
+            <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
             </pagination-controls>
         </div>
+
+
     </div>
+</div>
