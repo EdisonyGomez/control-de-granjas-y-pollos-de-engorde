@@ -90,4 +90,79 @@ export class ListaGalponesGallinasComponent implements OnInit {
     })
 
   }
+
+  
+  //Metodo para editar un galpon de gallinas usando firestore database
+  onEdit(gallina: Gallina) {
+    this.galponService.addGallinaEdit(gallina);
+  }
+  editarGallina() {
+    const gallina: Gallina = {
+      fecha: this.form.value.fecha,
+      cantidad_ponedoras: this.form.value.cantidad_ponedoras,
+      alimento: this.form.value.alimento,
+      vermifumigaciones: this.form.value.vermifumigaciones,
+      lunes: this.form.value.lunes,
+      martes: this.form.value.martes,
+      miercoles: this.form.value.miercoles,
+      jueves:this.form.value.jueves,
+      viernes:this.form.value.viernes,
+      sabado:this.form.value.sabado,
+      domingo:this.form.value.domingo,
+      observaciones: this.form.value.observaciones
+    }
+    this.loading = true;
+    this.galponService.updateGallina(this.id, gallina).then(() => {
+      this.loading = false;
+      this.toastr.info('Datos actualizados satisfatoriamente', 'Operación completada');
+      this.form.reset();
+      this.boton_enviar = true;
+    }, error => {
+      this.loading = false;
+      this.toastr.error('algo pasó',error);
+    })
+  }
+
+
+  //Metodo para eliminar un galpon de gallinas usando firestore database
+  onDelete(id: string) {
+    this.loading = true;
+    this.galponService.eliminiarGallina(id).then(() => {
+      this.loading = false;
+      this.toastr.error('Galpón eliminado satisfatoriamente', 'Operación completada');
+    }, error => {
+      this.toastr.error('ocurrio un error', error);
+    });
+  }
+
+  
+  open(content:any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title',
+                                       "size": "lg",
+                                      centered: true,
+                                      backdrop: true,
+                                      animation: true,
+                                      keyboard: true,
+                                      backdropClass: "modal-backdrop"  }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  } 
+
+  
+  /**
+   * Write code on Method
+   *
+   * @return response()
+   */
+   private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  } 
 }

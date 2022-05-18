@@ -90,7 +90,7 @@ private codorniz$ = new Subject<any>();
 
   //actualizar codorniz con firestore
   addCodornizEdit(codorniz: Codorniz){
-    this.gallina$.next(codorniz);
+    this.codorniz$.next(codorniz);
   }
 
   getCodornizEdit(): Observable<Codorniz>{

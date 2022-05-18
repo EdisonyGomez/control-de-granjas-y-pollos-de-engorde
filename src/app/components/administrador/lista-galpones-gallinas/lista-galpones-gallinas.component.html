@@ -1,9 +1,15 @@
 <div class="container">
     <div class="card">
         <div class="header text-white" style="text-align: center;">
-            <h1>Galpon de ponedoras </h1>
+            <h1>
+              Galpon de ponedoras 
+              <div *ngIf="loading" class="spinner-border text-white float-end" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            </h1>
         </div>
         <div class="container-2" *ngFor="let gallina of gallinaList |paginate: { itemsPerPage:2, currentPage: page }">
+         <div class="container-5">
             <div class="container-3">
                 <div class="cont-2">
                     <div class="form-group">
@@ -72,12 +78,18 @@
                     </div>
                 </div>
             </div>
-
+        </div>
+            <div  class="modal-footer">
+                <a class="btn btn-md btn-warning" (click)="onEdit(gallina) " (click)="open(modalGallinas)">
+                  <i class="far fa-edit"></i> editar
+                </a>
+                <a class="btn btn-md btn-danger" (click)="onDelete(gallina.id)">
+                  <i class="far fa-trash-alt"></i> eliminar
+                </a>
+              </div>
+            
         </div>
 
-        <!-- <a class="btn btn-sm btn-secondary" (click)="onEdit2(gallina) " (click)="open(mymodal)"  >
-                                <i class="far fa-edit"></i>    editar
-                            </a> -->
         <div class="card-footer">
             <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
             </pagination-controls>
@@ -86,3 +98,110 @@
 
     </div>
 </div>
+
+
+<ng-template #modalGallinas let-modal>
+    <div class="modal-header text-white">
+      <h4 class="modal-title title" id="modal-basic-title">Editar datos
+        <div *ngIf="loading" class="spinner-border text-white float-end" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span class="text-white" aria-hidden="true">x</span>
+      </button>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="editarGallina()">
+      <div style="margin-left: 20px;">
+        <h6>Los campos con <span style="color:red">*</span> son obligatorios</h6>
+      </div>
+      <div class="formulario-modal">
+        <div class="container-1-modal">
+          <div class="columna-1-modal">
+            <div class="form-group">
+              <label for="">Fecha:<span style="color:red">*</span></label>
+              <input type="date" class="form-control" formControlName="fecha" [ngModel]='date | date:"yyyy-MM-dd" '
+                (ngModelChange)='date=$event'>
+            </div>
+            <div class="form-group">
+              <label for="">Cant de ponedoras:
+               <span style="color:red">*</span>
+              </label>
+              <input type="number" class="form-control" formControlName="cantidad_ponedoras"
+                placeholder="Cantidad de ponedoras">
+            </div>
+            <div class="form-group">
+              <label for="">Alimento x unidad:</label>
+              <input type="number" class="form-control" formControlName="alimento"
+                placeholder="Cantidad de alimento x unidad">
+            </div>
+          </div><!-- Fin columna-1 -->
+            <div class="form-group">
+              <label for="" >Vermifumigaciones:</label>
+              <textarea name="textarea" placeholder="vermifumigaciones y tratamientos" rows="6" cols="50" class="form-control"
+              formControlName="vermifumigaciones">
+            </textarea>
+            </div>         
+          </div><!-- fin container-1 -->
+          <hr>
+          <div class="flex-container-2-modal">
+            <h6>Cantidad de huevos del lote</h6>        
+            <div class="fila-1-modal">
+              <div class="card2-modal text-center" style="align-items: center;">
+                lunes
+                <input type="text" class="form-control" formControlName="lunes" placeholder="">
+              </div>
+              <div class="card2-modal text-center" style="align-items: center;">
+                Martes
+                <input type="text" class="form-control" formControlName="martes" placeholder="">
+              </div>
+              <div class="card2-modal text-center" style="align-items: center;">
+                Miercoles
+                <input type="text" class="form-control" formControlName="miercoles" placeholder="">
+              </div>
+              <div class="card2-modal text-center" style="align-items: center;">
+                Jueves
+                <input type="text" class="form-control" formControlName="jueves" placeholder="">
+              </div>
+            </div><!-- Fin fila-1 -->
+            <div class="fila-1-modal">
+              <div class="card2-modal text-center" style="align-items: center;">
+                Viernes
+                <input type="text" class="form-control" formControlName="viernes" placeholder="">
+              </div>
+              <div class="card2-modal text-center" style="align-items: center;">
+                Sabado
+                <input type="text" class="form-control" formControlName="sabado" placeholder="">
+              </div>
+              <div class="card2-modal text-center" style="align-items: center;">
+                Domingo
+                <input type="text" class="form-control" formControlName="domingo" placeholder="">
+              </div>
+            </div><!-- Fin fila-1 -->
+            <div class="form-group text-area">
+              <label for="" >Observaciones:</label>
+              <textarea name="textarea" placeholder="observaciones" rows="6" cols="50" class="form-control"
+                formControlName="observaciones">
+              </textarea>
+            </div>
+          </div>
+          
+        </div> <!-- fin formulario -->
+      
+      
+      <div class="modal-footer">
+        <button  type="submit" class="btn btn-danger">
+          <i class="fas fa-plus-circle"></i> registrar
+        </button>
+  
+  
+        <!-- <button type="reset" class="btn btn-info" 
+            (click)="resetForm(polloForm)" style="margin-top: 10px; margin-left: 3px; ">
+        <i class="fas fa-eraser"></i>Borrar selección
+    </button> -->
+  
+      </div>
+    </form>
+  </ng-template>
+  <!-- --------------------------Modal para gallinas------------------------------------- -->
+  

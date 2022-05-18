@@ -29,10 +29,8 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    flex-direction: row;
+    flex-direction: column;
     padding: 5px;
-    border: solid;
-    border-radius: 2rem;
     margin: 10px;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
@@ -87,7 +85,67 @@
     margin: 3px;
 }
 
-.flex-container-2 {
+
+
+.container-5{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card2 {
+    box-shadow: 0 8px 17px 2px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%), 0 5px 5px -3px rgb(0 0 0 / 20%);
+    border-radius: 7px;
+    width: 80px;
+    margin: 6px;
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    background-color: rgba(243, 91, 91, 0.49);
+    border-radius: 12px;
+    border: solid 1px rgba(209, 213, 219, 0.3);
+
+}
+
+  /* ---------------MODAL---------------- */
+  .modal-header {
+    background-color: #f35b5b;
+    color: white;
+  }
+  
+  .modal-header h4 {
+    font-size: 35px;
+    font-weight: 900;
+  }
+  
+  .formulario-modal {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    padding: 5px;
+    margin: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 700;
+  }
+  
+  .container-1-modal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 60%;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+  }
+  
+  .flex-container-2-modal {
     display: flex;
     justify-content: space-around;
     align-content: center;
@@ -102,9 +160,34 @@
     border-top: none;
 }
 
+.flex-container-2-modal h6{
+    font-size: 20px;
+    font-weight: 900;
+  }
 
+  .text-area {
+    margin-top: 10px;
+  }
+  
+  .fila-1-modal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+hr {
+    height: 40vh;
+    width: .5vw;
+    border-width: 0;
+    color: #f35b5b;
+    background-color: #f35b5b;
+  }  
+  
+  .title {
+    margin: 0px auto;
+  }
 
-.card2 {
+  .card2-modal {
     box-shadow: 0 8px 17px 2px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%), 0 5px 5px -3px rgb(0 0 0 / 20%);
     border-radius: 7px;
     width: 80px;
@@ -114,5 +197,8 @@
     background-color: rgba(243, 91, 91, 0.49);
     border-radius: 12px;
     border: solid 1px rgba(209, 213, 219, 0.3);
-
-}
+  }
+  
+  .card2-modal input {
+    width: 60px;
+  }

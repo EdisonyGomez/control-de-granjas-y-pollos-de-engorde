@@ -82,3 +82,61 @@
     flex-direction: row;
     /* flex-wrap: wrap; */
   }
+
+  /* ---------------MODAL---------------- */
+  .modal-header {
+    background-color: #f35b5b;
+    color: white;
+  }
+  
+  .modal-header h4 {
+    font-size: 35px;
+    font-weight: 900;
+  }
+  
+  .formulario-modal {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    padding: 5px;
+    margin: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 700;
+  }
+  
+  .container-1-modal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 60%;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+  }
+  
+  .columna-1-modal .form-group {
+    margin: 3px;
+  }
+  
+  .container-2-modal {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 50%;
+    padding: 5px;
+  }
+  
+  .columna-2-modal {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  

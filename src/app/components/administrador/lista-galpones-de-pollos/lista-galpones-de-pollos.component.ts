@@ -64,17 +64,7 @@ export class ListaGalponesDePollosComponent implements OnInit {
         observaciones: data.observaciones
       })
     })
-    //   this.resetForm() ;
-    //   this.polloService.getpollo()
-    //   .snapshotChanges()
-    //   .subscribe(item => {
-    //   this.polloList= [];
-    //   item.forEach(element => {
-    //   let x:any = element.payload.toJSON(); 
-    //   x["$key"] = element.key;
-    //   this.polloList.push(x as Pollo) ;
-    //   });
-    // });
+
   }
   //Metodo para listar los gapones con firestore database
   showGalponesPollos() {
@@ -124,21 +114,16 @@ export class ListaGalponesDePollosComponent implements OnInit {
 
   //Metodo para eliminar un galpon de pollos usando firestore database
   onDelete2(id: string) {
+    this.loading = true;
     this.polloService.eliminiarPollo(id).then(() => {
+      this.loading = false;
       this.toastr.error('Galpón eliminado satisfatoriamente', 'Operación completada');
     }, error => {
       this.toastr.error('ocurrio un error', error);
     });
   }
 
-  // onSubmit(polloForm: NgForm): void {
-  //   if(polloForm.value.id == ""){
-  //     this.polloService.insertpollo(polloForm.value)
-  //   }else{
-  //    this.polloService.updatepollo(polloForm.value) ;
-  //    this.resetForm(polloForm) ;
-  //   }
-  // }
+
 
   resetForm(polloForm?: NgForm) {
     if (polloForm != null)
