@@ -73,7 +73,9 @@ SignIn(email: string, password: string) {
       this.SetUserData(result.user);
     })
     .catch((error) => {
-      window.alert(error.message);
+      // window.alert(error.message);
+      this.toastr.error(error , 'Algo pasó');
+
     });
 }
 //--------------------------------------------------------------------
@@ -91,10 +93,13 @@ ForgotPassword(passwordResetEmail: string) {
   return this.afAuth
     .sendPasswordResetEmail(passwordResetEmail)
     .then(() => {
-      window.alert('Password reset email sent, check your inbox.');
+      // window.alert('Password reset email sent, check your inbox.');
+      this.toastr.success('Correo de verificación enviado, revise su correo' , 'Completado');
+
     })
     .catch((error) => {
       window.alert(error);
+
     });
 }
 //--------------------------------------------------------------------

@@ -1,12 +1,11 @@
 <div class="flex-container">
-  <!-- <div class="cont" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="../visitantes" style="max-width: 18rem; cursor: pointer; "> -->
   <div class="contenedor" (click)="open(modalPollos)">
     <figure class="snip1566">
       <img src="assets/img/pollos.jpg">
     </figure>
     <div class="contenedor2">
       <i class="fas fa-plus-circle fa-2x"></i>
-      <h5 class="card-title">&nbsp; Agregar galpón de pollos</h5>
+      <h5>&nbsp; Agregar galpón de pollos</h5>
     </div>
   </div>
   <div class="contenedor" (click)="open(modalGallinas)">
@@ -15,7 +14,7 @@
     </figure>
     <div class="contenedor2">
       <i class="fas fa-plus-circle fa-2x"></i>
-      <h5 class="card-title">&nbsp; Registro de ponedoras</h5>
+      <h5>&nbsp; Registro de ponedoras</h5>
     </div>
   </div>
   <div class="contenedor" (click)="open(modalCodornices)">
@@ -24,18 +23,17 @@
     </figure>
     <div class="contenedor2">
       <i class="fas fa-plus-circle fa-2x"></i>
-      <h5 class="card-title">&nbsp; Registro de codornices</h5>
+      <h5>&nbsp; Registro de codornices</h5>
     </div>
   </div>
-
   <router-outlet> </router-outlet>
 </div>
 <!-- -------------------------------------------------------------------------- -->
 <!---------------------------- Modal para pollos----------------------------------------->
-<ng-template #modalPollos let-modal class="modal">
+<ng-template #modalPollos let-modal>
   <div class="modal-header">
     <div class="title">
-      <h4 class="modal-title" id="modal-basic-title">
+      <h4 id="modal-basic-title">
         Nuevo Galpon
         <div *ngIf="loading" class="spinner-border text-white float-end" role="status">
           <span class="sr-only">Loading...</span>
@@ -92,17 +90,17 @@
       <div class="container-2">
         <div class="columna-2">
           <div class="form-group">
-            <label for="">fecha de ingreso <span style="color:red">*</span></label>
+            <label for="">Fecha de ingreso: <span style="color:red">*</span></label>
             <input type="date" class="form-control" formControlName="fecha_ingreso" [ngModel]='date | date:"yyyy-MM-dd" '
               (ngModelChange)='date=$event'>
           </div>
           <div class="form-group">
-            <label for="">fecha de egreso</label>
+            <label for="">Fecha de egreso:</label>
             <input type="date" class="form-control" formControlName="fecha_egreso">
           </div>
         </div>
         <div class="form-group">
-          <label for="" class="text-white">Observaciones</label>
+          <label for="" class="text-white">Observaciones:</label>
           <textarea name="textarea" placeholder="observaciones" rows="6" cols="45" class="form-control"
             formControlName="observaciones">
           </textarea>

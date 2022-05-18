@@ -1,0 +1,278 @@
+body {
+    background: url("../../../../assets/img/login.jpg");
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: 100% 100%;
+    z-index: 10;
+  }
+  
+  .displayTable {   
+    text-align: center;
+    z-index: 9;
+    width: 300px;
+    height: 370px;  
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  
+  .displayTableCell {
+    padding: 1.25rem;
+    color: black;
+    font-size: 15px;
+  }
+  
+
+  .or-container {
+    align-items: center;
+    color: rgb(254, 252, 252);
+    display: flex;
+    margin: 10px 0
+  }
+  
+  .line-separator {
+    background-color: #ccc;
+    flex-grow: 5;
+    height: 1px
+  }
+  
+  .form-control {
+    display: inline-block;
+    height: 43px;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 5px;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-bottom: 1px solid #ccc;
+    margin-top: 2px;
+  }
+  
+  h3 {
+    width: 100%;
+    /* background-color: #f35b5b; */
+    border-radius: 10px;
+    background: rgba(243, 91, 91, 0.90);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  
+  .btn-iniciar {
+    background-color: #f35b5b;
+    color: white;
+  }
+  
+  .or-label {
+    flex-grow: 1;
+    text-align: center
+  }
+  
+  .btn-google {
+    display: inline-block;
+    background: white;
+    border: thin solid #888;
+    box-shadow: 1px 1px 1px grey;
+    white-space: nowrap;
+    height: 38px;
+  }
+  
+  span.icon {
+    background: url("../../../../assets/img/btn_google.png") transparent 5px 50% no-repeat;
+    ;
+    display: inline-block;
+    vertical-align: middle;
+    width: 42px;
+    height: 42px;
+    background-size: 100% 100%;
+    margin-left: -21px;
+    margin-top: -8px;
+  }
+  
+  span.buttonText {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -5px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  
+  
+  .forgotPassword {
+    cursor: pointer;
+  }
+  
+  .redirectToLogin {
+    cursor: pointer;
+  }
+  
+  
+  
+  /*Barra de formularios material desing ================*/
+  .bar-login {
+    position: relative;
+    display: block;
+    width: 100%;
+  }
+  
+  .bar-login:before,
+  .bar-login:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: rgb(254, 253, 253);
+    transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+  }
+  
+  .bar-login:before {
+    left: 50%;
+  }
+  
+  .bar-login:after {
+    right: 50%;
+  }
+  
+  input.material-login-control:focus~.bar-login:before,
+  input.material-login-control:focus~.bar-login:after {
+    width: 50%;
+  }
+  
+  .group-material-login {
+    position: relative;
+    margin-bottom: 25px;
+  }
+  
+  .group-material-login label {
+    color: rgb(252, 246, 246);
+    font-size: 17px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+  }
+  
+  .material-login-control,
+  .material-control-login {
+    background-color: transparent;
+    font-size: 17px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgb(255, 253, 253);
+    outline: none;
+  }
+  
+  .material-login-control:focus {
+    outline: none;
+  }
+  
+  .group-material-login label {
+    color: rgb(254, 251, 251);
+    font-size: 17px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+  }
+  
+  /* Estado activo */
+  input.material-login-control:focus:valid~label,
+  input.material-login-control:valid~label {
+    top: -18px;
+    font-size: 13px;
+    color: rgb(12, 12, 12);
+  }
+  
+  input.material-login-control:focus:invalid:required,
+  input.material-login-control:invalid:required {
+    outline: none;
+    box-shadow: none;
+  }
+  
+  .spinner-border {
+    width: 26px;
+    height: 26px;
+  }
+
+  .redirect{
+    font-weight: 800;
+  }
+  
+  /* RESPONSIVE */
+  @media screen and (max-width: 600px) {
+    .displayTable {
+      width: 200px;
+      height: 300px;
+    }
+  
+    .authBlock {
+      font-size: 10px;
+    }
+  
+    .btn-google {
+      width: 150px;
+      font-size: 10px;
+    }
+  
+    .group-material-login {
+      font-size: 10px;
+  
+    }
+  
+    .material-control-login {
+      font-size: 10px;
+  
+    }
+  
+    input.material-login-control {
+      font-size: 10px;
+  
+    }
+  
+    span.buttonText {
+      font-size: 10px;
+    }
+  
+    .or-container {
+      margin: 0;
+    }
+  
+    .form-control {
+      height: 33px;
+      width: 100%;
+      font-weight: 400;
+      padding: 2px;
+    }
+  
+    .forgotPassword {
+      padding-top: 0;
+    }
+  
+  
+  }

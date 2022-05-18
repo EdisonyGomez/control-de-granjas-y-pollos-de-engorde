@@ -1,39 +1,84 @@
-.flex-container{
-    padding: 10px;
-    padding-top: 30px;
-}
-.card{
-    margin-top: 70px;
-    box-shadow: 0 8px 17px 2px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%), 0 5px 5px -3px rgb(0 0 0 / 20%); border-radius:7px; 
+.container {
+    padding: 90px 20px 20px 20px;
+
 }
 
-.header h1{
+.card {
+    background: url("../../../../assets/img/galpon-pollos.jpg");
+    /* background-size: 100% 100%; */
+    color: white;
+    border-radius: 7px;
+    padding: 0;
+}
+
+.card-footer {
+    background: white;
+    text-align: center;
+    color: black;
+}
+
+.header h1 {
     background-color: #f35b5b;
     padding: 20px;
     text-align: center;
     border-top-left-radius: 7px;
-    border-top-right-radius: 7px; 
+    border-top-right-radius: 7px;
 }
-.table-container{
-    padding: 15px;
-     text-align: center;
- }
- .btn{
-    margin: 3px;
-    width: 63%;
-    height:25px;
-    font-size: 13px;
-}
-.formulario{
-    display:flex;
-    justify-content: space-evenly;
+
+.formulario {
+    display: flex;
+    justify-content: center;
     align-content: center;
-    flex-wrap: wrap ;
-  }
-  .column{
-    display:flex;    
+    /* flex-wrap: wrap;  */
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    padding: 5px;
+    margin: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 700;
+  }
   
+  .container-1 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 130%;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+  }
+  
+  .columna-1{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .columna-1 .form-group {
+    margin: 3px;
+  }
+
+  .container-2 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    padding: 5px;
+  }
+  
+  .columna-2 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .container-4{
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
   }

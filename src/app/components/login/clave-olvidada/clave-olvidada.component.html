@@ -1,18 +1,33 @@
-<div class="displayTable">
+<body>
+  <div class="displayTable text-white">
+    <h3>Recuperar clave</h3>
     <div class="displayTableCell">
       <div class="authBlock">
-        <h3>Reset Password</h3>
-        <p class="text-center">Please enter your email address to request a password reset.</p>
-        <div class="formGroup">
-          <input type="email" class="formControl" placeholder="Email Address" #passwordResetEmail required>
+        <form #registerForm="ngForm" (ngSubmit)="recuperarClave(userName.value)"  >
+          <div class="form-group form-primary group-material-login text-black">
+            <input type="text" class="form-control material-login-control" #userName required>
+            <span class="highlight-login"></span>
+            <span class="bar-login"></span>
+            <label class="usuario text-black">
+              <i class="fas fa-user "></i> &nbsp;
+              Correo electronico
+            </label>
+          </div>
+                
+          <button type="submit" class="btn btn-iniciar">
+            Enviar 
+            <div *ngIf="loading" class="spinner-border float-end" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </button>
+        </form>
+        <div class="redirectToLogin">
+          <span class="redirect text-white" routerLink="/login">
+            <i class="fas fa-arrow-circle-left"></i>
+            Volver al login
+          </span>
         </div>
-        <!-- Calling ForgotPassword from AuthService Api -->
-        <div class="formGroup">
-          <input type="submit" class="btn btnPrimary" value="Reset Password" (click)="authService.ForgotPassword(passwordResetEmail.value)">
-        </div>
-      </div>
-      <div class="redirectToLogin">
-        <span>Go back to ? <span class="redirect" routerLink="/sign-in">Log In</span></span>
       </div>
     </div>
   </div>
+</body>

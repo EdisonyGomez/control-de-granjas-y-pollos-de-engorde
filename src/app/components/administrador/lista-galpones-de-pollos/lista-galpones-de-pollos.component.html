@@ -1,139 +1,164 @@
-<div class="flex-container">
-    <div class="card">
-        <div class="header text-white" style="text-align: center;">
-            <h1>Lista de Galpones de pollos </h1>
-        </div>
-        <div class="table-container text-center"  style="font-size: smaller;">
-            <table class="table table-responsive-md table-sm table-hover">
-                <tbody>
-                    <tr>
-                        <td>Numero de galpon</td>
-                        <td>Cantidad de pollos  </td>
-                        <td>Fecha de ingreso</td>
-                        <td>Muertes presacrificio</td>
-                        <td>Peso al sacrificio</td>
-                        <td>Fecha de egreso</td>
-                        <td>Observaciones</td>
-                        <td>Acción</td>
-                    </tr>
-                    <tr *ngFor="let pollo of polloList |paginate: { itemsPerPage:3, currentPage: page }">
-                        <td>{{pollo.numero_galpon}}</td>
-                        <td>{{pollo.numero_pollos}}</td>
-                        <td>{{pollo.fecha_ingreso}}</td>
-                        <td>{{pollo.muerte_pre_sacrificio}}</td>
-                        <td>{{pollo.peso_sacrificio}}</td>
-                        <td>{{pollo.fecha_egreso}}</td>
-                        <td>{{pollo.observaciones}}</td>
-                        <td>
-                            <a class="btn btn-sm btn-secondary" (click)="onEdit2(pollo) " (click)="open(mymodal)"  >
-                                <i class="far fa-edit"></i>    editar
-                            </a>
-                            <a class="btn btn-sm btn-danger" (click)="onDelete2(pollo.id)">
-                                <i class="far fa-trash-alt"></i>    eliminar
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <pagination-controls 
-                                (pageChange)="page = $event"
-                                previousLabel="Anterior"
-                                nextLabel="Siguiente">
-            </pagination-controls>
-        </div>
+<div class="container">
+  <div class="card">
+    <div class="header text-white" style="text-align: center;">
+      <h1>Galpones de Pollos </h1>
     </div>
-<hr>
+    <div class="container-2" *ngFor="let pollo of polloList |paginate: { itemsPerPage:2, currentPage: page }">
+      <div class="formulario">
+        <div class="container-4">
+          <div class="container-1">
+            <div class="columna-1">
+              <div class="form-group">
+                <label for="">Numero de galpon:
+                  <span style="color:red">*</span>
+                </label>
+                <input type="number" disabled class="form-control" value="{{pollo.numero_galpon}}">
+              </div>
+              <div class="form-group">
+                <label for="">
+                  Cantidad de pollos:
+                  <span style="color:red">*</span>
+                </label>
+                <input type="number" disabled class="form-control" value="{{pollo.numero_pollos}}">
+              </div>
+            </div>
+            <div class="columna-1">
+              <div class="form-group">
+                <label for="">Peso al sacrificio:</label>
+                <input type="number" disabled  class="form-control" value="{{pollo.peso_sacrificio}}">
+              </div>
+              <div class="form-group">
+                <label for="">Muertes pre sacrificio:</label>
+                <input type="number" disabled class="form-control" value="{{pollo.muerte_pre_sacrificio}}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">Vacunas y medicamentos:</label>
+              <textarea name="textarea" disabled rows="6" cols="49" class="form-control" value="{{pollo.medicamentos}}">
+              </textarea>
+            </div>
 
-<ng-template #mymodal let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Editar datos de galpon
-        <div *ngIf="loading" class="spinner-border text-danger float-end" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-      </h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">x</span>
-      </button>
-    </div>
-    <form [formGroup]="form" (ngSubmit)="editarPollo()"  >
-        <div style="margin-left: 20px;">
-          <h6>Los campos con <span style="color:red">*</span>  son  obligatorios</h6> 
-        </div>
-        <div class="formulario" >                 
-             <div class="column">
-              <div class="form-group">
-                  <label for="" style="color:red">*</label>
-                      <input type="number"
-                             class="form-control" 
-                             formControlName="numero_galpon" 
-                             placeholder="Numero de galpon">
-              </div>
-               <div class="form-group">
-                <label for="" style="color:red">*</label>
-                    <input type="number"
-                            class="form-control" 
-                            formControlName="numero_pollos" 
-                            placeholder="Numero de pollos">
-               </div> 
-              
-              <div class="form-group">
-                <label for="" class="text-white" >salida</label>
-                    <input type="number"
-                             class="form-control" 
-                             formControlName="peso_sacrificio" 
-                             placeholder="Peso al sacrificio">
-              </div>
-              <div class="form-group">
-                <label for="" class="text-white" >muerte_pre_sacreificio</label>
-                    <input type="number"
-                             class="form-control" 
-                             formControlName="muerte_pre_sacrificio" 
-                             placeholder="muertes pre sacrificio">
-              </div>
-              <div class="form-group">
-                <label for="" class="text-white" >medicamentos</label>
-                      <input type="text"
-                             class="form-control" 
-                             formControlName="medicamentos" 
-                             placeholder="Vacunas y medicamentos">
-              </div> 
           </div>
           <hr>
-          <div class="column">                  
-            <div class="form-group">
-              <label for="" >fecha de ingreso <span style="color:red">*</span></label>
-                <input type="date"
-                    class="form-control" 
-                    formControlName="fecha_ingreso">
-            </div> 
-             <div class="form-group">
-              <label for="" >fecha de egreso</label>
-               <input type="date"
-                  class="form-control" 
-                  formControlName="fecha_egreso">
-            </div>               
-            <div class="form-group">
-              <label for="" class="text-white" >Observaciones</label>
-              <input type="text"
-                             class="form-control" 
-                             formControlName="observaciones" 
-                             placeholder="observaciones"
-                             style="height: 130px;">
+          <div class="container-2">
+            <div class="columna-2">
+              <div class="form-group">
+                <label for="">Fecha de ingreso: <span style="color:red">*</span></label>
+                <input type="date" disabled class="form-control" [ngModel]='date | date:"yyyy-MM-dd" '
+                  (ngModelChange)='date=$event' value="{{pollo.fecha_ingreso}}">
+              </div>
+              <div class="form-group">
+                <label for="">Fecha de egreso:</label>
+                <input type="date" disabled class="form-control" value="{{pollo.fecha_egreso}}">
+              </div>
             </div>
-          </div>              
-        </div>
-         <div class="modal-footer">
-          <button [disabled]="boton_enviar" type="submit" class="btn btn-danger" >
-              <i class="fas fa-plus-circle"></i> registrar
-          </button>
-      
-          <!-- <button type="reset" class="btn btn-info" 
-                  (click)="resetForm(polloForm)" style="margin-top: 10px; margin-left: 3px; ">
-              <i class="fas fa-eraser"></i>Borrar selección
-          </button> -->
-          
-            <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')" >Ok</button> -->
+            <div class="form-group">
+              <label for="" class="text-white">Observaciones:</label>
+              <textarea name="textarea" disabled placeholder="observaciones" rows="6" cols="45" class="form-control"
+                value="{{pollo.observaciones}}">
+              </textarea>
+            </div>
           </div>
-       </form>
-</ng-template>
+
+        </div>
+        <div  class="modal-footer">
+          <a class="btn btn-md btn-warning" (click)="onEdit2(pollo) " (click)="open(mymodal)">
+            <i class="far fa-edit"></i> editar
+          </a>
+          <a class="btn btn-md btn-danger" (click)="onDelete2(pollo.id)">
+            <i class="far fa-trash-alt"></i> eliminar
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
+      </pagination-controls>
+    </div>
+
+  </div>
 </div>
+
+
+
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Editar datos de galpon
+      <div *ngIf="loading" class="spinner-border text-danger float-end" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">x</span>
+    </button>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="editarPollo()">
+    <div style="margin-left: 20px;">
+      <h6>Los campos con <span style="color:red">*</span> son obligatorios</h6>
+    </div>
+    <div class="formulario">
+      <div class="container-1">
+        <div class="columna-1">
+          <div class="form-group">
+            <label for="">Numero de galpon:
+              <span style="color:red">*</span>
+            </label>
+            <input type="number" class="form-control" formControlName="numero_galpon">
+          </div>
+          <div class="form-group">
+            <label for="" >
+              Cantidad de pollos: 
+              <span style="color:red">*</span>
+            </label>
+            <input type="number" class="form-control" formControlName="numero_pollos">
+          </div>
+        </div>
+        <div class="columna-1">
+          <div class="form-group">
+            <label for="" >Peso al sacrificio:</label>
+            <input type="number" class="form-control" formControlName="peso_sacrificio">
+          </div>
+          <div class="form-group">
+            <label for="" >Muertes pre sacrificio:</label>
+            <input type="number" class="form-control" formControlName="muerte_pre_sacrificio">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Vacunas y medicamentos:</label>
+          <textarea name="textarea" rows="6" cols="49" class="form-control"
+            formControlName="medicamentos">
+          </textarea>
+        </div>
+        
+       </div>
+      <hr>
+      <div class="container-2">
+        <div class="columna-2">
+          <div class="form-group">
+            <label for="">Fecha de ingreso: <span style="color:red">*</span></label>
+            <input type="date" class="form-control" formControlName="fecha_ingreso" [ngModel]='date | date:"yyyy-MM-dd" '
+              (ngModelChange)='date=$event'>
+          </div>
+          <div class="form-group">
+            <label for="">Fecha de egreso:</label>
+            <input type="date" class="form-control" formControlName="fecha_egreso">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="" class="text-white">Observaciones:</label>
+          <textarea name="textarea" placeholder="observaciones" rows="6" cols="45" class="form-control"
+            formControlName="observaciones">
+          </textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button [disabled]="boton_enviar" type="submit" class="btn btn-danger">
+        <i class="fas fa-plus-circle"></i> registrar
+      </button>
+
+    </div>
+  </form>
+</ng-template>

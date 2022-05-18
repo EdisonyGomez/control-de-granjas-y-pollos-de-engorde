@@ -1,53 +1,60 @@
-<div class="displayTable">
+<body>
+  <div class="displayTable text-white">
+    <h3>Registro</h3>
     <div class="displayTableCell">
       <div class="authBlock">
-        <h3>Sign Up</h3>
-        <div class="formGroup">
-          <input
-            type="email"
-            class="formControl"
-            placeholder="Email Address"
-            #userEmail
-            required
-          />
-        </div>
-        <div class="formGroup">
-          <input
-            type="password"
-            class="formControl"
-            placeholder="Password"
-            #userPwd
-            required
-          />
-        </div>
-        <div class="formGroup">
-          <input
-            type="button"
-            class="btn btnPrimary"
-            value="Sign Up"
-            (click)="autenticacionService.SignUp(userEmail.value, userPwd.value)"
-          />
-        </div>
-        <div class="formGroup">
-          <span class="or"><span class="orInner">Or</span></span>
-        </div>
-        <!-- Continue with Google -->
-        <div class="formGroup">
-          <button
-            type="button"
-            class="btn googleBtn"
-            (click)="autenticacionService.GoogleAuth()"
-          >
-            <i class="fab fa-google-plus-g"></i>
-            Continue with Google
+        <form #registerForm="ngForm" (ngSubmit)="registrarUsuario(userName.value, userPassword.value)"  >
+          <div class="form-group form-primary group-material-login text-black">
+            <input type="text" class="form-control material-login-control" #userName required>
+            <span class="highlight-login"></span>
+            <span class="bar-login"></span>
+            <label class="usuario text-black">
+              <i class="fas fa-user "></i> &nbsp;
+              Correo electronico
+            </label>
+          </div>
+          <div class="form-group form-primary group-material-login ">
+            <input type="password" name="password" id="password1" class="form-control material-login-control "
+              autocomplete="on" #userPassword required>
+            <span class="fa fa-fw fa-eye show-password" id="password-icon" style="
+              float: right;
+              margin: -25px 10px 0 0;             
+              cursor: pointer;"></span>
+            <span class="highlight-login"></span>
+            <span class="bar-login"></span>
+            <label class="clave text-black">
+              <i class="fas fa-key "></i> &nbsp; 
+              Contraseña (6 caracteres)
+            </label>
+          </div>
+          <div class="form-group form-primary group-material-login text-black">
+            <input type="password" name="password" id="password2" class="form-control material-login-control "
+              autocomplete="on" #userPassword required>
+            <span class="fa fa-fw fa-eye show-password" id="password-icon2" style="
+              float: right;
+              margin: -25px 10px 0 0;             
+              cursor: pointer;"></span>
+            <span class="highlight-login"></span>
+            <span class="bar-login"></span>
+            <label class="clave text-black">
+              <i class="fas fa-key "></i> &nbsp;
+              Repita la contraseña
+            </label>
+          </div>         
+          <button type="submit" class="btn btn-iniciar">
+            Registrarse
+            <div *ngIf="loading" class="spinner-border float-end" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
           </button>
+        </form>
+        <div class="redirectToLogin">
+          <span class="redirect text-white" routerLink="/login">
+            <i class="fas fa-arrow-circle-left"></i>
+            Volver al login
+          </span>
         </div>
-      </div>
-      <div class="redirectToLogin">
-        <span
-          >Already have an account?
-          <span class="redirect" routerLink="/sign-in">Log In</span></span
-        >
       </div>
     </div>
   </div>
+</body>
