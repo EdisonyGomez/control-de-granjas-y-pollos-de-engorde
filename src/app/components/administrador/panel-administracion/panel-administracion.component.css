@@ -62,8 +62,6 @@ h1 {
   background-size: 100% 100%;
 }
 
-
-
 .item-hover {
   background-color: #000000cc;
   font-weight: bold;
@@ -87,6 +85,15 @@ h1 {
   opacity: 1;
 }
 
+/* ------------------------------Responsive----------------------------------------- */
 
-
-/* ---------------------------------------------------------------------------- */
+/* Para 320px */  
+@media only screen and (max-width: 340px) and (min-width: 5px)  { 
+  .contenedor-principal{
+    padding-top: 90px;
+  }
+  
+  .contenedor-info{
+    margin:5px;
+  }
+} 

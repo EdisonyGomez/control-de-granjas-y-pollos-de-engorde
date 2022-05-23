@@ -229,39 +229,15 @@ body {
     .displayTable {
       width: 200px;
       height: 300px;
-    }
+    } 
   
-    .authBlock {
-      font-size: 10px;
-    }
-  
-    .btn-google {
-      width: 150px;
-      font-size: 10px;
-    }
-  
-    .group-material-login {
-      font-size: 10px;
-  
-    }
-  
-    .material-control-login {
-      font-size: 10px;
-  
+    .form-group label {
+      font-size: 10px;  
     }
   
     input.material-login-control {
       font-size: 10px;
-  
-    }
-  
-    span.buttonText {
-      font-size: 10px;
-    }
-  
-    .or-container {
-      margin: 0;
-    }
+    }     
   
     .form-control {
       height: 33px;
@@ -270,9 +246,7 @@ body {
       padding: 2px;
     }
   
-    .forgotPassword {
-      padding-top: 0;
-    }
+   
   
   
   }

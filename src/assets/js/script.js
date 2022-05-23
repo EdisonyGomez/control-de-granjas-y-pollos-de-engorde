@@ -5,13 +5,13 @@ document.getElementById("btn_open").addEventListener("click", open_close_menu);
 var side_menu = document.getElementById("menu_side");
 var btn_open = document.getElementById("btn_open");
 var body = document.getElementById("body");
-var palabra = document.getElementById("palabra");
+var main = document.getElementById("main");
 
 //Evento para mostrar y ocultar menú
     function open_close_menu(){
         body.classList.toggle("body_move");
         side_menu.classList.toggle("menu__side_move");
-		palabra.classList.toggle("h4_move");
+		main.classList.toggle("main_move");
     }
 
 	

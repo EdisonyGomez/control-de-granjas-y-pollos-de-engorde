@@ -170,7 +170,7 @@ input.material-login-control:focus~.bar-login:after {
 }
 
 .group-material-login label {
-  color: rgb(252, 246, 246);
+  color: rgb(0, 0, 0);
   font-size: 17px;
   font-weight: normal;
   position: absolute;
@@ -199,7 +199,7 @@ input.material-login-control:focus~.bar-login:after {
 }
 
 .group-material-login label {
-  color: rgb(254, 251, 251);
+  color: rgb(0, 0, 0);
   font-size: 17px;
   font-weight: normal;
   position: absolute;

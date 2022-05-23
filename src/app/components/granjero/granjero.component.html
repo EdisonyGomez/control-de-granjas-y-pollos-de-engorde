@@ -7,28 +7,22 @@
 <body id="body">
 
     <header>
-        <!-- <div class="row"> -->
-            <div class="icon__menu">
+            <span class="icon__menu"> <!-- Botón hamburguesa -->
                 <i class="fas fa-bars" id="btn_open"></i>
-            </div>
-            <div class="titulo" id="finca">
-                <h1>Finca San Pablo</h1><br>
-            </div>
-            <!-- <div class="float-end" style="float: left; cursor:pointer;border:solid"> -->
-            <!-- CERRAR SESION -->
-            <span class="cerrar-sesion " style="float: left; cursor:pointer;border:solid" (click)="autenticacionService.SignOut()">
-                <i class="fas fa-sign-out-alt"></i>cerrar sesión
             </span>
-            <!-- </div>                 -->
-        <!-- </div> -->
+            <span class="titulo" id="finca"><!-- Titulo principal -->
+                <h1>Finca San Pablo</h1><br>
+            </span>
+           
+        
     </header>
     <!-- BARRA LATERAL -->
     <div class="menu__side" id="menu_side">
         <div class="name__page">
             <img src="assets/img/icons/ufps.png" alt="">
         </div>
-    
         <div class="options__menu">
+        <hr>        
                 <!-- ITEMS DE LA BARRA LATERAL -->
             <a class="button selected" routerLinkActive="active"  routerLink="/granjero">
                 <div class="option">
@@ -40,7 +34,7 @@
             <a class="button" routerLinkActive="active" routerLink="ingreso"  >
                 <div class="option">
                     <i class="fas fa-car" title="Visitantes"></i>
-                    <h4>Contról de ingreso</h4>
+                    <h4>Control de ingreso</h4>
                 </div>
             </a>
 
@@ -57,10 +51,18 @@
                     <h4>Administración de galpones</h4>
                 </div>
             </a>
+            <hr>
+            <a class="button" routerLinkActive="active" (click)="autenticacionService.SignOut()">
+                <div class="option">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <h4>Cerrar sesión</h4>
+                </div>
+            </a>
+             
         </div>
     </div><!-- FIN BARRA LATERAL -->
     <!-- INICIO DEL MAIN( CONTENIDO DE LOS COMPONENTES) -->
-  <main >  
+  <main id="main">  
        <router-outlet> </router-outlet>
        
   </main> 

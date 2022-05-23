@@ -4,7 +4,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Codorniz } from './../../../models/codorniz';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { DatePipe } from '@angular/common';
+import { DatePipe, DOCUMENT } from '@angular/common';
+
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts'
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-lista-galpones-codornices',
@@ -22,6 +26,7 @@ export class ListaGalponesCodornicesComponent implements OnInit {
   date = new Date();
   loading = false; 
   id: string;
+  observaciones: string;
   boton_enviar = false;
 
   constructor(public galponService: GalponService,
@@ -51,6 +56,7 @@ export class ListaGalponesCodornicesComponent implements OnInit {
 
     this.galponService.getCodornizEdit().subscribe(data => {
       this.id = data.id;
+      this.observaciones = data.observaciones;
       this.boton_enviar=false;
       console.log(data);
       this.form.patchValue({
@@ -84,6 +90,72 @@ export class ListaGalponesCodornicesComponent implements OnInit {
     })
   }
 
+   //funcion para crear el pdf
+   createPdf2() {
+    let docDefinition = {
+      content: [
+     
+        {
+          text: 'FINCA SAN PABLO',
+          fontSize: 30,
+          bold: true,
+          alignment: 'center',
+          decoration: 'underline',
+          color: 'tomato'
+        },
+       
+        {
+          text: ` ${new Date().toLocaleString()}`,
+          alignment: 'right'
+       },     
+       {
+        text: 'Reporte de codornices',
+        style: 'sectionHeader'
+      },
+        
+        {
+          table: {
+            // headerRows: 1,
+            widths: ['*', '*', '*'],
+            body: [
+              [{text: 'observaciones', style: 'tableHeader', alignment: 'center'}, {text: 'alimento', style: 'tableHeader', alignment: 'center'}, {text: 'vermifumigaciones', style: 'tableHeader', alignment: 'center'}],
+              ...this.codornizList.map(p => ([p.observaciones, p.alimento, p.vermifumigaciones]))
+            ], 
+          },
+          layout:{
+            hLineWidth: function (i, node) {
+              return (i === 0 || i === node.table.body.length) ? 2 : 1;
+            },
+            vLineWidth: function (i, node) {
+              return (i === 0 || i === node.table.widths.length) ? 2 : 1;
+            },
+            hLineColor: function (i, node) {
+              return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
+            },
+            vLineColor: function (i, node) {
+              return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
+            },           
+          }, alignment: 'center'
+        },
+      
+      ],
+      styles: {
+        sectionHeader: {
+          bold: true,
+          decoration: 'underline',
+          fontSize: 14,
+          margin: [0, 15,0, 15]          
+        },
+        tableHeader: {
+          bold: true,
+          fontSize: 13,
+          color: 'black'
+        }
+      }
+    };    
+      pdfMake.createPdf(docDefinition).open();     
+  
+  }
 
   
   //Metodo para editar un galpon de codornices usando firestore database
@@ -129,7 +201,9 @@ export class ListaGalponesCodornicesComponent implements OnInit {
     });
   }
 
-  
+ 
+
+  //Funcion que personaliza  y permite visualizar el modal
   open(content:any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title',
                                        "size": "lg",
@@ -159,5 +233,4 @@ export class ListaGalponesCodornicesComponent implements OnInit {
       return `with: ${reason}`;
     }
   } 
-
 }
