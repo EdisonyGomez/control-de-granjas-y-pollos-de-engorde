@@ -1,7 +1,7 @@
 export class Codorniz {
     id?: string;
     fecha:Date; 
-    cantidad_codornices: string;
+    cantidad_codornices: number;
     alimento: string;
     vermifumigaciones: string;
     lunes: string;
@@ -14,7 +14,7 @@ export class Codorniz {
     observaciones: string;
 
 
-    constructor(fecha: Date, cantidad_codornices: string, alimento: string,
+    constructor(fecha: Date, cantidad_codornices: number, alimento: string,
                 vermifumigaciones: string, lunes: string, martes: string, 
                 miercoles:  Date, jueves: string, viernes: string, sabado: string,
                 domingo: string, observaciones: string){

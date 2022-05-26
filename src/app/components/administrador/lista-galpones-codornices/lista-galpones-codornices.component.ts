@@ -1,13 +1,19 @@
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { GalponService } from './../../../services/galpones/galpon.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Codorniz } from './../../../models/codorniz';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe, DOCUMENT } from '@angular/common';
 
+// Import pdfmake-wrapper and the fonts to use
+import { IImg, Img, PdfMakeWrapper, Txt, Table } from 'pdfmake-wrapper';
+import * as pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
+
+import * as moment from 'moment';
+
 import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts'
+// import pdfFonts from 'pdfmake/build/vfs_fonts'
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -19,8 +25,10 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class ListaGalponesCodornicesComponent implements OnInit {
 
+ 
   codornizList: Codorniz[] = [];
   form: FormGroup;
+  observacionesForm: FormGroup;
   public page: number = 0;
   closeResult: string = '';
   date = new Date();
@@ -47,6 +55,10 @@ export class ListaGalponesCodornicesComponent implements OnInit {
       sabado:  ['',],
       domingo:  ['',],
       observaciones:  ['',],
+    }),
+    this.observacionesForm = this.fb.group({
+      fecha1: ['',],
+      fecha2: ['',],
     })
   }
   
@@ -90,70 +102,67 @@ export class ListaGalponesCodornicesComponent implements OnInit {
     })
   }
 
-   //funcion para crear el pdf
-   createPdf2() {
-    let docDefinition = {
-      content: [
-     
-        {
-          text: 'FINCA SAN PABLO',
-          fontSize: 30,
-          bold: true,
-          alignment: 'center',
-          decoration: 'underline',
-          color: 'tomato'
-        },
-       
-        {
-          text: ` ${new Date().toLocaleString()}`,
-          alignment: 'right'
-       },     
-       {
-        text: 'Reporte de codornices',
-        style: 'sectionHeader'
-      },
-        
-        {
-          table: {
-            // headerRows: 1,
-            widths: ['*', '*', '*'],
-            body: [
-              [{text: 'observaciones', style: 'tableHeader', alignment: 'center'}, {text: 'alimento', style: 'tableHeader', alignment: 'center'}, {text: 'vermifumigaciones', style: 'tableHeader', alignment: 'center'}],
-              ...this.codornizList.map(p => ([p.observaciones, p.alimento, p.vermifumigaciones]))
-            ], 
+ 
+
+  //crear PDF Con PdfMakeWrapper
+   async createPdf(){
+    const pdf = new PdfMakeWrapper();
+
+      pdf.add(
+        new Txt('Finca San Pablo').alignment('center').bold().color('tomato')
+        .fontSize(30).decoration('underline').end
+      );
+
+      pdf.add(
+      new Txt(new Date().toLocaleString()).alignment('right').end
+      );
+    
+      pdf.add(await new Img('../../../../assets/img/icons/ufps.png').width(300).opacity(0.1).absolutePosition(150, 150).build().then(async img => {
+        pdf.background(img);
+      }));
+
+      pdf.add(
+        new Txt('Reporte de codornices:').bold().fontSize(14).margin([0, 30,0, 0]).end
+      );
+
+      pdf.add(
+        new Table([
+          [ new Txt('observaciones').bold().end,
+            new Txt('alimento').bold().end,
+            new Txt('vermifumigaciones').bold().end,],
+          // ...this.codornizList.map(p => ([p.observaciones, p.alimento, p.vermifumigaciones]))
+          ...this.extraerFechas(this.observacionesForm.value.fecha1, this.observacionesForm.value.fecha2).map(p => ([p.observaciones, p.alimento, p.vermifumigaciones]))
+
+        ]).layout({
+          hLineWidth: function (i, node) {
+            return (i === 0 || i === node.table.body.length) ? 2 : 1;
           },
-          layout:{
-            hLineWidth: function (i, node) {
-              return (i === 0 || i === node.table.body.length) ? 2 : 1;
-            },
-            vLineWidth: function (i, node) {
-              return (i === 0 || i === node.table.widths.length) ? 2 : 1;
-            },
-            hLineColor: function (i, node) {
-              return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
-            },
-            vLineColor: function (i, node) {
-              return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
-            },           
-          }, alignment: 'center'
-        },
+          vLineWidth: function (i, node) {
+            return (i === 0 || i === node.table.widths.length) ? 2 : 1;
+          },
+          hLineColor: function (i, node) {
+            return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
+          },
+          vLineColor: function (i, node) {
+            return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
+          }       
+        }).widths("*").alignment('center').headerRows(1).end
+      );
       
-      ],
-      styles: {
-        sectionHeader: {
-          bold: true,
-          decoration: 'underline',
-          fontSize: 14,
-          margin: [0, 15,0, 15]          
-        },
-        tableHeader: {
-          bold: true,
-          fontSize: 13,
-          color: 'black'
-        }
-      }
-    };    
-      pdfMake.createPdf(docDefinition).open();     
+      pdf.create().open();
+  }
+
+  extraerFechas(fecha1: Date, fecha2:Date): Codorniz[]{
+    let codornizList2: Codorniz[] = [];
+  
+    codornizList2 = this.codornizList.filter(codorniz => codorniz.fecha > fecha1 && codorniz.fecha < fecha2);
+    return codornizList2
+  
+  }
+
+
+   //funcion para crear el pdf
+   createPdf_fechas() {
   
   }
 
@@ -206,7 +215,7 @@ export class ListaGalponesCodornicesComponent implements OnInit {
   //Funcion que personaliza  y permite visualizar el modal
   open(content:any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title',
-                                       "size": "lg",
+                                     "size": "lg",
                                       centered: true,
                                       backdrop: true,
                                       animation: true,

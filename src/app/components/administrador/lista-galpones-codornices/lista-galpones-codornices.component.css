@@ -25,6 +25,13 @@
     border-top-right-radius: 7px;
 }
 
+.btn-info{
+  margin-right: 0;
+  float: right;
+  color: white;
+  font-weight: 700;
+}
+
 .container-2 {
     display: flex;
     justify-content: center;
@@ -122,7 +129,7 @@
     flex-wrap: wrap;
 }
 
-/* -----------Modal----------------------- */
+/* -----------Modal Edicion----------------------- */
 .modal-header {
     background-color: #f35b5b;
     color: white;
@@ -216,4 +223,8 @@
   .title {
     margin: 0px auto;
   }
-  
+  /* ---------------------------------------------------------- */
+
+  .columna-1-modal-reportes {
+    padding: 3px;
+  }

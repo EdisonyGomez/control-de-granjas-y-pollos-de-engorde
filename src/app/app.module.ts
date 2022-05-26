@@ -51,7 +51,12 @@ import { PanelAdministracionComponent } from './components/administrador/panel-a
 import { ListaGalponesGallinasComponent } from './components/administrador/lista-galpones-gallinas/lista-galpones-gallinas.component';
 import { ListaGalponesCodornicesComponent } from './components/administrador/lista-galpones-codornices/lista-galpones-codornices.component';
 
+//pdf
+import { PdfMakeWrapper } from 'pdfmake-wrapper';
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
 
+// Set the fonts to use
+PdfMakeWrapper.setFonts(pdfFonts);
 
 @NgModule({
   declarations: [

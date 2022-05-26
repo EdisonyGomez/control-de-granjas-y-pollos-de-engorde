@@ -1,16 +1,22 @@
 <div class="container">
     <div class="card">
         <div class="header text-white" style="text-align: center;">
-            <h1>
+            <h1 >
+              
+              <h4 routerLink="../admin" style="float: left; cursor: pointer;  font-size: medium;" > 
+                <i class="fas fa-arrow-circle-left"></i>   
+                volver              
+              </h4>  
+             
                 Galpon de codornices
                 <div *ngIf="loading" class="spinner-border text-white float-end" role="status">
                     <span class="sr-only">Loading...</span>
-                </div> 
-                <div class="botonPdf">
-                  <a (click)="createPdf2()" class="btn btn-info">Crear Reporte</a>
-                </div>
+                </div>     
+                <a class="btn btn-md btn-info" (click)="open(modalReportes)">
+                  <i class="far fa-file-alt"></i> Reportes
+                </a>           
             </h1>
-            
+           
         </div>
         <div class="container-2" *ngFor="let codorniz of codornizList |paginate: { itemsPerPage:2, currentPage: page }">
           <div class="container-5">
@@ -83,7 +89,7 @@
                 </div>
             </div>
          </div>
-         <div  class="modal-footer">
+         <div  class="modal-footer">          
             <a class="btn btn-md btn-warning" (click)="onEdit(codorniz) " (click)="open(modalCodornices)">
               <i class="far fa-edit"></i> editar
             </a>
@@ -104,16 +110,21 @@
 
 <!-- --------------------------Modal para codornices------------------------------------- -->
 <ng-template #modalCodornices let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title title" id="modal-basic-title">Editar datos
+  <div class="modal-header">
+    <div class="title">
+      <h4 id="modal-basic-title">
+        <i class="far fa-edit"></i>Editar datos de galpon
         <div *ngIf="loading" class="spinner-border text-white float-end" role="status">
           <span class="sr-only">Loading...</span>
         </div>
       </h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    </div>
+    <div class="float-end ">
+      <button type="button" class="close " aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span class="text-white" aria-hidden="true">x</span>
       </button>
     </div>
+  </div>
     <form [formGroup]="form" (ngSubmit)="editarCodorniz()">
       <div style="margin-left: 20px;">
         <h6>Los campos con <span style="color:red">*</span> son obligatorios</h6>
@@ -124,7 +135,7 @@
             <div class="form-group">
               <label for="">Fecha:<span style="color:red">*</span></label>
               <input type="date" class="form-control" formControlName="fecha" [ngModel]='date | date:"yyyy-MM-dd" '
-                (ngModelChange)='date=$event'>
+                (ngModelChange)='date=$event' >
             </div>
             <div class="form-group">
               <label for="">Cant de codornices:
@@ -200,3 +211,60 @@
     </form>
   </ng-template>
   <!-- --------------------------Modal para codornices------------------------------------- -->
+
+  
+<!-- --------------------------Modal de Reportes  PDF------------------------------------- -->
+<ng-template #modalReportes let-modal>
+  <div class="modal-header">
+    <div class="title">
+      <h4 id="modal-basic-title">
+        <i class="far fa-file-alt"></i> Reportes de galpon
+        <div *ngIf="loading" class="spinner-border text-white float-end" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </h4>
+    </div>
+    <div class="float-end ">
+      <button type="button" class="close " aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span class="text-white" aria-hidden="true">x</span>
+      </button>
+    </div>
+  </div>  
+    <div class="formulario-modal">
+      <div class="container-1-modal" style="border:solid">
+        <div class="columna-1-modal-reportes" style="border:solid"><!--columna-1 -->
+          <h3>Reporte de observaciones:</h3>
+          
+          <form [formGroup]="observacionesForm" (ngSubmit)="createPdf()">
+          <div class="form-group">
+            <label for="">Fecha:<span style="color:red">*</span></label>
+            <input type="date" class="form-control" formControlName="fecha1" >
+          </div>
+          
+          <div class="form-group">
+            <label for="">Fecha:<span style="color:red">*</span></label>
+            <input type="date" class="form-control" formControlName="fecha2">
+          </div>
+         
+          <button  type="submit" class="btn btn-danger">
+            <i class="fas fa-plus-circle"></i> registrar
+          </button>
+          <button  (click)="createPdf_fechas()" class="btn btn-danger">
+            <i class="fas fa-plus-circle"></i> registrar
+          </button>
+        </form>
+        </div><!-- Fin columna-1 -->
+         <div class="columna-1-modal" style="border:solid"><!--columna-1 -->
+          
+        </div><!-- Fin columna-1 -->
+                 
+        </div><!-- fin container-1 -->
+        <hr>
+        <div class="flex-container-2-modal">
+        </div>
+        
+      </div> <!-- fin formulario -->
+    
+   
+</ng-template>
+<!-- --------------------------Modal de Reportes  PDF------------------------------------- -->
