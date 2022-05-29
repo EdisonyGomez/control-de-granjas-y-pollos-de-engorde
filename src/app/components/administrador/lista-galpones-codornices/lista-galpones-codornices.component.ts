@@ -8,13 +8,7 @@ import { DatePipe, DOCUMENT } from '@angular/common';
 
 // Import pdfmake-wrapper and the fonts to use
 import { IImg, Img, PdfMakeWrapper, Txt, Table } from 'pdfmake-wrapper';
-import * as pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
 
-import * as moment from 'moment';
-
-import pdfMake from 'pdfmake/build/pdfmake';
-// import pdfFonts from 'pdfmake/build/vfs_fonts'
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-lista-galpones-codornices',
@@ -105,7 +99,7 @@ export class ListaGalponesCodornicesComponent implements OnInit {
  
 
   //crear PDF Con PdfMakeWrapper
-   async createPdf(){
+   async createPdf_observaciones(){
     const pdf = new PdfMakeWrapper();
 
       pdf.add(
@@ -117,21 +111,22 @@ export class ListaGalponesCodornicesComponent implements OnInit {
       new Txt(new Date().toLocaleString()).alignment('right').end
       );
     
-      pdf.add(await new Img('../../../../assets/img/icons/ufps.png').width(300).opacity(0.1).absolutePosition(150, 150).build().then(async img => {
+      pdf.add(await new Img('../../../../assets/img/icons/ufps.png').width(300).
+          opacity(0.1).absolutePosition(150, 150).build().then(async img => {
         pdf.background(img);
       }));
 
       pdf.add(
-        new Txt('Reporte de codornices:').bold().fontSize(14).margin([0, 30,0, 0]).end
+        new Txt('Reporte de Observaciones:').bold().fontSize(14).margin([0, 30,0, 0]).end
       );
 
       pdf.add(
         new Table([
-          [ new Txt('observaciones').bold().end,
-            new Txt('alimento').bold().end,
-            new Txt('vermifumigaciones').bold().end,],
+          [ new Txt('Fecha').bold().end,
+            new Txt('Observaciones').bold().end,],
           // ...this.codornizList.map(p => ([p.observaciones, p.alimento, p.vermifumigaciones]))
-          ...this.extraerFechas(this.observacionesForm.value.fecha1, this.observacionesForm.value.fecha2).map(p => ([p.observaciones, p.alimento, p.vermifumigaciones]))
+          ...this.extraerFechas(this.observacionesForm.value.fecha1, this.observacionesForm.value.fecha2).
+                    map(p => ([p.fecha, p.observaciones]))
 
         ]).layout({
           hLineWidth: function (i, node) {
@@ -160,14 +155,77 @@ export class ListaGalponesCodornicesComponent implements OnInit {
   
   }
 
+// ---------------------REPORTE DE OBSERVACIONES-----------------------------------
 
+// ---------------------REPORTE DE HUEVOS INICIO-----------------------------------
    //funcion para crear el pdf
-   createPdf_fechas() {
-  
-  }
+   async createPdf_huevos() {
+    const pdf = new PdfMakeWrapper();
 
+    pdf.add(
+      new Txt('Finca San Pablo').alignment('center').bold().color('tomato')
+      .fontSize(30).decoration('underline').end
+    );
+
+    pdf.add(
+    new Txt(new Date().toLocaleString()).alignment('right').end
+    );
   
-  //Metodo para editar un galpon de codornices usando firestore database
+    pdf.add(await new Img('../../../../assets/img/icons/ufps.png').width(300).
+        opacity(0.1).absolutePosition(150, 150).build().then(async img => {
+      pdf.background(img);
+    }));
+
+    pdf.add(
+      new Txt('Reporte de cantidad de huevos:').bold().fontSize(14).margin([0, 30,0, 0]).end
+    );
+
+    pdf.add(
+      new Table([
+        [ 
+          new Txt('Fecha').bold().end,
+          new Txt('Lunes').bold().end,
+          new Txt('Martes').bold().end,
+          new Txt('Miercoles').bold().end,
+          new Txt('Jueves').bold().end,
+          new Txt('Viernes').bold().end,
+          new Txt('Sabado').bold().end,
+          new Txt('Domingo').bold().end,
+          new Txt('Producción semana').bold().end,
+      ]
+          ,
+        // ...this.codornizList.map(p => ([p.observaciones, p.alimento, p.vermifumigaciones]))
+        ...this.extraerFechas(this.observacionesForm.value.fecha1,
+           this.observacionesForm.value.fecha2).map(p => 
+            ([p.fecha, p.lunes, p.martes, p.miercoles,
+              p.jueves, p.viernes, p.sabado, p.domingo,
+             p.lunes + p.martes + p.miercoles +
+             p.jueves + p.viernes + p.sabado + p.domingo])),
+             [{text:'Total de producción',bold: true, colSpan: 3 }, {text:'-'}, {text:'-'},{text:'-'},{text:'-'},{text:'-'},{text:'-'},{text:'-'}, this.extraerFechas(this.observacionesForm.value.fecha1,
+              this.observacionesForm.value.fecha2).reduce((sum, p)=> sum + (p.lunes + p.martes + p.miercoles +
+                p.jueves + p.viernes + p.sabado + p.domingo), 0)]
+
+      ]).layout({
+        hLineWidth: function (i, node) {
+          return (i === 0 || i === node.table.body.length) ? 2 : 1;
+        },
+        vLineWidth: function (i, node) {
+          return (i === 0 || i === node.table.widths.length) ? 2 : 1;
+        },
+        hLineColor: function (i, node) {
+          return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
+        },
+        vLineColor: function (i, node) {
+          return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
+        }       
+      }).alignment('center').headerRows(1).margin([-10, 15,0, 0]).end
+    );
+    
+    pdf.create().open();
+  }
+// --------------------------------------------------------------------------------
+  
+  //Función para editar un galpon de codornices usando firestore database
   onEdit(codorniz: Codorniz) {
     this.galponService.addCodornizEdit(codorniz);
   }

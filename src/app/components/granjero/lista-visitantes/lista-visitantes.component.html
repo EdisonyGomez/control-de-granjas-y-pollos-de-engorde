@@ -1,7 +1,10 @@
 <div class="flex-container">
     <div class="card">
             <div class="header text-white" style="text-align: center;">
-                <h1 >Lista de visitantes</h1>
+                <h1 >Lista de visitantes 
+                    <div *ngIf="loading" class="spinner-border text-white float-end" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>    </h1>
             </div>
             <div class="table-container">
                 <table class="table table-responsive-md table-sm table-hover">
@@ -20,7 +23,7 @@
                                 <a class="btn btn-sm btn-secondary" (click)="onEdit(visitante)" >
                                     <i class="far fa-edit"></i>    editar
                                 </a>
-                                <a class="btn btn-sm btn-danger" (click)="onDelete(visitante.$key)">
+                                <a class="btn btn-sm btn-danger" (click)="onDelete(visitante.id)">
                                     <i class="far fa-trash-alt"></i>    eliminar
                                 </a>
                             </td>

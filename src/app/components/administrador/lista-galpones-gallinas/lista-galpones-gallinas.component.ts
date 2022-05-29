@@ -12,6 +12,10 @@ import { GalponService } from './../../../services/galpones/galpon.service';
 
 //clase
 import { Gallina } from './../../../models/gallina';
+
+// Import pdfmake-wrapper and the fonts to use
+import { IImg, Img, PdfMakeWrapper, Txt, Table } from 'pdfmake-wrapper';
+
 @Component({
   selector: 'app-lista-galpones-gallinas',
   templateUrl: './lista-galpones-gallinas.component.html',
@@ -23,6 +27,7 @@ export class ListaGalponesGallinasComponent implements OnInit {
 
   gallinaList: Gallina[] = [];
   form: FormGroup;
+  observacionesForm: FormGroup;
   public page: number = 0;
   closeResult: string = '';
   date = new Date();
@@ -48,6 +53,10 @@ export class ListaGalponesGallinasComponent implements OnInit {
       sabado:  ['',],
       domingo:  ['',],
       observaciones:  ['',],
+    }),
+    this.observacionesForm = this.fb.group({
+      fecha1: ['',],
+      fecha2: ['',],
     })
   }
 
@@ -75,9 +84,7 @@ export class ListaGalponesGallinasComponent implements OnInit {
     })
   }
 
-
-
-   //Metodo para listar los gapones con firestore database
+   //Funcion para listar los gapones con firestore database
    showGalponesGallinas() {
     this.galponService.getGallina().subscribe(doc => {
       this.gallinaList = [];
@@ -92,7 +99,7 @@ export class ListaGalponesGallinasComponent implements OnInit {
   }
 
   
-  //Metodo para editar un galpon de gallinas usando firestore database
+  //Funcion para editar un galpon de gallinas usando firestore database
   onEdit(gallina: Gallina) {
     this.galponService.addGallinaEdit(gallina);
   }
@@ -124,7 +131,7 @@ export class ListaGalponesGallinasComponent implements OnInit {
   }
 
 
-  //Metodo para eliminar un galpon de gallinas usando firestore database
+  //Funcion para eliminar un galpon de gallinas usando firestore database
   onDelete(id: string) {
     this.loading = true;
     this.galponService.eliminiarGallina(id).then(() => {
@@ -135,7 +142,135 @@ export class ListaGalponesGallinasComponent implements OnInit {
     });
   }
 
+
+
+  //crear PDF Con PdfMakeWrapper
+  async createPdf_observaciones(){
+    const pdf = new PdfMakeWrapper();
+
+      pdf.add(
+        new Txt('Finca San Pablo').alignment('center').bold().color('tomato')
+        .fontSize(30).decoration('underline').end
+      );
+
+      pdf.add(
+      new Txt(new Date().toLocaleString()).alignment('right').end
+      );
+    
+      pdf.add(await new Img('../../../../assets/img/icons/ufps.png').width(300).
+          opacity(0.1).absolutePosition(150, 150).build().then(async img => {
+        pdf.background(img);
+      }));
+
+      pdf.add(
+        new Txt('Reporte de Observaciones:').bold().fontSize(14).margin([0, 30,0, 0]).end
+      );
+
+      pdf.add(
+        new Table([
+          [ new Txt('Fecha').bold().end,
+            new Txt('Observaciones').bold().end,],
+          // ...this.codornizList.map(p => ([p.observaciones, p.alimento, p.vermifumigaciones]))
+          ...this.extraerFechas(this.observacionesForm.value.fecha1, this.observacionesForm.value.fecha2).
+                    map(p => ([p.fecha, p.observaciones]))
+
+        ]).layout({
+          hLineWidth: function (i, node) {
+            return (i === 0 || i === node.table.body.length) ? 2 : 1;
+          },
+          vLineWidth: function (i, node) {
+            return (i === 0 || i === node.table.widths.length) ? 2 : 1;
+          },
+          hLineColor: function (i, node) {
+            return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
+          },
+          vLineColor: function (i, node) {
+            return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
+          }       
+        }).widths("*").alignment('center').headerRows(1).end
+      );
+      
+      pdf.create().open();
+  }
+// ---------------------REPORTE DE OBSERVACIONES-----------------------------------
+
+// ---------------------REPORTE DE HUEVOS INICIO-----------------------------------
+   //funcion para crear el pdf
+   async createPdf_huevos() {
+    const pdf = new PdfMakeWrapper();
+
+    pdf.add(
+      new Txt('Finca San Pablo').alignment('center').bold().color('tomato')
+      .fontSize(30).decoration('underline').end
+    );
+
+    pdf.add(
+    new Txt(new Date().toLocaleString()).alignment('right').end
+    );
   
+    pdf.add(await new Img('../../../../assets/img/icons/ufps.png').width(300).
+        opacity(0.1).absolutePosition(150, 150).build().then(async img => {
+      pdf.background(img);
+    }));
+
+    pdf.add(
+      new Txt('Reporte de cantidad de huevos:').bold().fontSize(14).margin([0, 30,0, 0]).end
+    );
+
+    pdf.add(
+      new Table([
+        [ 
+          new Txt('Fecha').bold().end,
+          new Txt('Lunes').bold().end,
+          new Txt('Martes').bold().end,
+          new Txt('Miercoles').bold().end,
+          new Txt('Jueves').bold().end,
+          new Txt('Viernes').bold().end,
+          new Txt('Sabado').bold().end,
+          new Txt('Domingo').bold().end,
+          new Txt('Producción semana').bold().end,
+      ]
+          ,
+        ...this.extraerFechas(this.observacionesForm.value.fecha1,
+           this.observacionesForm.value.fecha2).map(p => 
+            ([p.fecha, p.lunes, p.martes, p.miercoles,
+              p.jueves, p.viernes, p.sabado, p.domingo,
+             p.lunes + p.martes + p.miercoles +
+             p.jueves + p.viernes + p.sabado + p.domingo])),
+             [{text:'Total de producción',bold: true, colSpan: 3 }, {text:'-'}, {text:'-'},{text:'-'},{text:'-'},{text:'-'},{text:'-'},{text:'-'}, this.extraerFechas(this.observacionesForm.value.fecha1,
+              this.observacionesForm.value.fecha2).reduce((sum, p)=> sum + (p.lunes + p.martes + p.miercoles +
+                p.jueves + p.viernes + p.sabado + p.domingo), 0)]
+
+      ]).layout({
+        hLineWidth: function (i, node) {
+          return (i === 0 || i === node.table.body.length) ? 2 : 1;
+        },
+        vLineWidth: function (i, node) {
+          return (i === 0 || i === node.table.widths.length) ? 2 : 1;
+        },
+        hLineColor: function (i, node) {
+          return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';
+        },
+        vLineColor: function (i, node) {
+          return (i === 0 || i === node.table.widths.length) ? 'black' : 'gray';
+        }       
+      }).alignment('center').headerRows(1).margin([-10, 15,0, 0]).end
+    );    
+    pdf.create().open();
+  }
+// --------------------------------------------------------------------------------
+
+
+// -----------------Función para filtar fechas---------------------------------
+extraerFechas(fecha1: Date, fecha2:Date): Gallina[]{
+  let gallinaList2: Gallina[] = [];
+  gallinaList2 = this.gallinaList.filter(gallina => gallina.fecha > fecha1 && gallina.fecha < fecha2);
+  return gallinaList2
+}
+// --------------------------------------------------------------------------------
+
+
+  //---- Abrir el modal----
   open(content:any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title',
                                        "size": "lg",
@@ -149,7 +284,7 @@ export class ListaGalponesGallinasComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   } 
-
+// ---------------------------------
   
   /**
    * Write code on Method

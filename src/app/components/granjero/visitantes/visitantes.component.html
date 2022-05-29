@@ -11,48 +11,56 @@
                      Registro de Visitantes
                 </h1>
             </div>
-            <form #visitanteForm="ngForm" (ngSubmit)="onSubmit(visitanteForm)"  >
-                <input hidden  name="$key" #$key="ngModel" [(ngModel)]="visitanteService.selectedVisitante.$key"> 
-                <div class="form-group">
-                    <label for="" hidden class="text-white">nombre</label>
-                    <input type="text"
-                         
-                        class="form-control" 
-                        name="nombre" 
-                        #nombre="ngModel"
-                        [(ngModel)]="visitanteService.selectedVisitante.nombre"
-                        placeholder="Nombre(s)"  
-                         >
-                </div>
-                <div class="form-group">
-                    <label for="" class="text-white" >apellido</label>
-                    <input  type="text" 
+            <form  [formGroup]="form" (ngSubmit)="onSubmitVisitante()"  >
+             <div class="contenedor-form">
+                <div class="columna-1">
+                    <div class="form-group">
+                        <label for="" >Nombre(s):</label>
+                        <input type="text"                            
+                            class="form-control" 
+                            formControlName="nombre" placeholder="Nombre(s)">
+                    </div>
+                    <div class="form-group">
+                        <label for="" >Apellido(s):</label>
+                        <input  type="text" 
+                                class="form-control"
+                                formControlName="apellido" placeholder="Apellido(s)" >
+                    </div>
+                    <div class="form-group">
+                        <label for="">Documento:</label>
+                        <input type="text" 
                             class="form-control"
-                            name="apellido"
-                            #apellido="ngModel"
-                            [(ngModel)]="visitanteService.selectedVisitante.apellido"
-                            placeholder="Apellido(s)"  
-                            >
-                </div>
-                <div class="form-group">
-                    <label for="" class="text-white">documento</label>
-                    <input type="text" 
-                        class="form-control"
-                        name="documento"
-                        #documento="ngModel"
-                        [(ngModel)]="visitanteService.selectedVisitante.documento"
-                        placeholder="Documento" 
-                        >
-                </div>
-            
+                            formControlName="documento" placeholder="Documento">
+                    </div>
+                 </div>
+                 <div class="columna-1">
+                    <div class="form-group">
+                        <label for="">Fecha de ingreso:</label>
+                        <input type="date" class="form-control" formControlName="fecha_ingreso" [ngModel]='date | date:"yyyy-MM-dd" '
+                        (ngModelChange)='date=$event'>
+                  </div>
+                    <div class="form-group">
+                        <label for="">Hora de ingreso:</label>
+                        <input type="text" class="form-control" formControlName="hora_ingreso"   >
+                    </div>
+                    <div class="form-group">
+                        <label for="">Rol en la universidad:</label>
+                        <select formControlName='visitanteService.selectedVisitante.rol' name="rol" id="rol" class='form-control option'>
+                            <option value="Estudiante">Estudiante</option>
+                            <option value="Docente">Docente</option>
+                           
+                            </select>
+                    </div>
+                 </div>
+             </div>
                     <button type="submit" class="btn btn-danger" style="margin-top: 10px;">
                         <i class="fas fa-plus-circle"></i> registrar
                     </button>
                 
-                    <button type="reset" class="btn btn-info" 
+                    <!-- <button type="reset" class="btn btn-info" 
                             (click)="resetForm(visitanteForm)" style="margin-top: 10px; margin-left: 3px; ">
                         <i class="fas fa-eraser"></i>Borrar selección
-                    </button>
+                    </button> -->
             </form>
         </div>
             <app-lista-visitantes></app-lista-visitantes>

@@ -226,5 +226,7 @@
   /* ---------------------------------------------------------- */
 
   .columna-1-modal-reportes {
-    padding: 3px;
+    padding: 16px;
+    border:solid #f35b5b 1px;
+    border-radius: 3em;
   }

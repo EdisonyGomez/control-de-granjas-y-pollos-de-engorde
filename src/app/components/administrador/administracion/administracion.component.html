@@ -33,7 +33,7 @@
 <ng-template #modalPollos let-modal>
   <div class="modal-header">
     <div class="title">
-      <h4 id="modal-basic-title">
+      <h4 id="modal-basic-title title">
         Nuevo Galpon
         <div *ngIf="loading" class="spinner-border text-white float-end" role="status">
           <span class="sr-only">Loading...</span>
@@ -46,7 +46,6 @@
       </button>
     </div>
   </div>
-
   <form [formGroup]="formPollo" (ngSubmit)="onSubmitPollo()">
     <div style="margin-left: 20px;">
       <h6>Los campos con <span style="color:red">*</span> son obligatorios</h6>
@@ -81,10 +80,9 @@
         <div class="form-group">
           <label for="">Vacunas y medicamentos:</label>
           <textarea name="textarea" rows="6" cols="49" class="form-control"
-            formControlName="medicamentos">
+            formControlName="medicamentos" placeholder="Vacunas y medicamentos">
           </textarea>
-        </div>
-        
+        </div>        
        </div>
       <hr>
       <div class="container-2">
@@ -100,7 +98,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="" class="text-white">Observaciones:</label>
+          <label for="" >Observaciones:</label>
           <textarea name="textarea" placeholder="observaciones" rows="6" cols="45" class="form-control"
             formControlName="observaciones">
           </textarea>
@@ -110,12 +108,7 @@
     <div class="modal-footer">
       <button [disabled]="formPollo.invalid" type="submit" class="btn btn-danger">
         <i class="fas fa-plus-circle"></i> registrar
-      </button>
-
-      <!-- <button type="reset" class="btn btn-info" 
-                        (click)="resetForm(polloForm)" style="margin-top: 10px; margin-left: 3px; ">
-                    <i class="fas fa-eraser"></i>Borrar selección
-                </button> -->
+      </button>    
     </div>
   </form>
 </ng-template>
@@ -154,7 +147,7 @@
               placeholder="Cantidad de ponedoras">
           </div>
           <div class="form-group">
-            <label for="">Alimento x unidad:</label>
+            <label for="">Alimento x unidad(Kg):</label>
             <input type="number" class="form-control" formControlName="alimento"
               placeholder="Cantidad de alimento x unidad">
           </div>
@@ -170,35 +163,35 @@
         <div class="flex-container-2">
           <h6>Cantidad de huevos del lote</h6>        
           <div class="fila-1">
-            <div class="card   text-center" style="align-items: center;">
+            <div class="card text-center" style="align-items: center;">
               lunes
-              <input type="text" class="form-control" formControlName="lunes" placeholder="">
+              <input type="number" class="form-control" formControlName="lunes" placeholder="">
             </div>
             <div class="card  text-center" style="align-items: center;">
               Martes
-              <input type="text" class="form-control" formControlName="martes" placeholder="">
+              <input type="number" class="form-control" formControlName="martes" placeholder="">
             </div>
             <div class="card  text-center" style="align-items: center;">
               Miercoles
-              <input type="text" class="form-control" formControlName="miercoles" placeholder="">
+              <input type="number" class="form-control" formControlName="miercoles" placeholder="">
             </div>
             <div class="card  text-center" style="align-items: center;">
               Jueves
-              <input type="text" class="form-control" formControlName="jueves" placeholder="">
+              <input type="number" class="form-control" formControlName="jueves" placeholder="">
             </div>
           </div><!-- Fin fila-1 -->
           <div class="fila-1">
             <div class="card  text-center" style="align-items: center;">
               Viernes
-              <input type="text" class="form-control" formControlName="viernes" placeholder="">
+              <input type="number" class="form-control" formControlName="viernes" placeholder="">
             </div>
             <div class="card  text-center" style="align-items: center;">
               Sabado
-              <input type="text" class="form-control" formControlName="sabado" placeholder="">
+              <input type="number" class="form-control" formControlName="sabado" placeholder="">
             </div>
             <div class="card  text-center" style="align-items: center;">
               Domingo
-              <input type="text" class="form-control" formControlName="domingo" placeholder="">
+              <input type="number" class="form-control" formControlName="domingo" placeholder="">
             </div>
           </div><!-- Fin fila-1 -->
           <div class="form-group text-area">
@@ -209,19 +202,12 @@
           </div>
         </div>
         
-      </div> <!-- fin formulario -->
-    
+      </div> <!-- fin formulario -->  
     
     <div class="modal-footer">
       <button [disabled]="formGallina.invalid" type="submit" class="btn btn-danger">
         <i class="fas fa-plus-circle"></i> registrar
-      </button>
-
-
-      <!-- <button type="reset" class="btn btn-info" 
-          (click)="resetForm(polloForm)" style="margin-top: 10px; margin-left: 3px; ">
-      <i class="fas fa-eraser"></i>Borrar selección
-  </button> -->
+      </button> 
 
     </div>
   </form>
@@ -260,7 +246,7 @@
               placeholder="Cantidad de codornices">
           </div>
           <div class="form-group">
-            <label for="">Alimento x unidad:</label>
+            <label for="">Alimento x unidad(Kg):</label>
             <input type="number" class="form-control" formControlName="alimento"
               placeholder="Cantidad de alimento x unidad">
           </div>
@@ -278,33 +264,33 @@
           <div class="fila-1">
             <div class="card   text-center" style="align-items: center;">
               lunes
-              <input type="text" class="form-control" formControlName="lunes" placeholder="">
+              <input type="number" class="form-control" formControlName="lunes" placeholder="">
             </div>
             <div class="card  text-center" style="align-items: center;">
               Martes
-              <input type="text" class="form-control" formControlName="martes" placeholder="">
+              <input type="number" class="form-control" formControlName="martes" placeholder="">
             </div>
             <div class="card  text-center" style="align-items: center;">
               Miercoles
-              <input type="text" class="form-control" formControlName="miercoles" placeholder="">
+              <input type="number" class="form-control" formControlName="miercoles" placeholder="">
             </div>
             <div class="card  text-center" style="align-items: center;">
               Jueves
-              <input type="text" class="form-control" formControlName="jueves" placeholder="">
+              <input type="number" class="form-control" formControlName="jueves" placeholder="">
             </div>
           </div><!-- Fin fila-1 -->
           <div class="fila-1">
             <div class="card  text-center" style="align-items: center;">
               Viernes
-              <input type="text" class="form-control" formControlName="viernes" placeholder="">
+              <input type="number" class="form-control" formControlName="viernes" placeholder="">
             </div>
             <div class="card  text-center" style="align-items: center;">
               Sabado
-              <input type="text" class="form-control" formControlName="sabado" placeholder="">
+              <input type="number" class="form-control" formControlName="sabado" placeholder="">
             </div>
             <div class="card  text-center" style="align-items: center;">
               Domingo
-              <input type="text" class="form-control" formControlName="domingo" placeholder="">
+              <input type="number" class="form-control" formControlName="domingo" placeholder="">
             </div>
           </div><!-- Fin fila-1 -->
           <div class="form-group text-area">

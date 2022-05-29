@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Visitante } from 'src/app/models/visitante';
 
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -19,31 +20,50 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 export class ListaVisitantesComponent implements OnInit {
   visitanteList: Visitante[] = [];
-  public page:number=0;
+  public page: number = 0;
+  loading = false; 
+  form: FormGroup;
+  id: string;
+  constructor(private visitanteService: VisitanteService,
+    private toastr: ToastrService) { }
+
+  ngOnInit(): void {
+    this.showVisitantes();
+   
+  }
+
+ 
   
-  constructor( private visitanteService: VisitanteService, 
-               private toastr: ToastrService ) { }
+  //Función para listar los gapones con firestore database
+  showVisitantes() {
+    this.visitanteService.getvisitante().subscribe(doc => {
+      this.visitanteList = [];
+      doc.forEach((element: any) => {
+        this.visitanteList.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        });
+      })
+    })
+  }
 
-  ngOnInit(): void {   
-    this.visitanteService.getvisitante()
-    .snapshotChanges()
-    .subscribe(item => {
-    this.visitanteList= [];
-    item.forEach(element => {
-    let x:any = element.payload.toJSON();
-    x["$key"] = element.key;
-    this.visitanteList.push(x as Visitante) ;
+   //Función para editar un galpon de codornices usando firestore database
+   onEdit(visitante: Visitante) {
+    this.visitanteService.addVisitanteEdit(visitante);
+  }
+  
+
+
+  //Metodo para eliminar un galpon de codornices usando firestore database
+  onDelete(id: string) {
+    this.loading = true;
+    this.visitanteService.eliminiarVisitante(id).then(() => {
+      this.loading = false;
+      this.toastr.success('Registro eliminado satisfatoriamente', 'Operación completada');
+    }, error => {
+      this.toastr.error('ocurrio un error', error);
     });
-  });
-}
+  }
 
-onEdit(visitante: Visitante){
-  this.visitanteService.selectedVisitante= Object.assign({},visitante);
-}
-
-onDelete($key: string){
-  this.visitanteService.deleteVisitante($key);
-  this.toastr.success('Visitante eliminado satisfatoriamente', 'Operación completada');
-}
 
 }

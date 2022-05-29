@@ -24,28 +24,28 @@
                 <div class="cont-2">
                     <div class="form-group">
                         <label for="">Fecha:<span class="text-white"></span></label>
-                        <input type="date" class="form-control" value="{{codorniz.fecha}}">
+                        <input type="date" class="form-control" disabled value="{{codorniz.fecha}}">
                     </div>
                     <div class="form-group">
                         <label for="">Cant de codornices:</label>
-                        <input type="number" class="form-control" value="{{codorniz.cantidad_codornices}}">
+                        <input type="number" class="form-control" disabled value="{{codorniz.cantidad_codornices}}">
                     </div>
                     <div class="form-group">
                         <label for="">Alimento x unidad:</label>
-                        <input type="number" class="form-control" value="{{codorniz.alimento}}">
+                        <input type="number" class="form-control" disabled value="{{codorniz.alimento}}">
                     </div>
                 </div>
                 <div class="cont-2">
                     <div class="form-group">
                         <label for="">Vermifumigaciones:</label>
-                        <!-- <input type="number" class="form-control" value="{{codorniz.vermifumigaciones}}"> -->
+                        <!-- <input type="number" class="form-control" disabled value="{{codorniz.vermifumigaciones}}"> -->
                         <textarea placeholder="Vermifumigaciones y tratamientos"
-                         rows="3" class="form-control" value="{{codorniz.vermifumigaciones}}">
+                         rows="3" class="form-control" disabled value="{{codorniz.vermifumigaciones}}">
                         </textarea>
                     </div>
                     <div class="form-group">
                         <label for="">Observaciones:</label>
-                        <textarea placeholder="observaciones" rows="3" class="form-control"
+                        <textarea placeholder="observaciones" rows="3" class="form-control" disabled
                             value="{{codorniz.observaciones}}">
                         </textarea>
                     </div>
@@ -57,34 +57,34 @@
                     <div class="cont-1">
                         <div class="card2 text-center" style="align-items: center;">
                             lunes
-                            <input type="text" class="form-control" value="{{codorniz.lunes}}">
+                            <input type="number" class="form-control" disabled value="{{codorniz.lunes}}">
                         </div>
                         <div class="card2 text-center" style="align-items: center;">
                             Martes
-                            <input type="text" class="form-control" value="{{codorniz.martes}}">
+                            <input type="number" class="form-control" disabled value="{{codorniz.martes}}">
                         </div>
                         <div class="card2 text-center" style="align-items: center;">
                             Miercoles
-                            <input type="text" class="form-control" value="{{codorniz.miercoles}}">
+                            <input type="number" class="form-control" disabled value="{{codorniz.miercoles}}">
                         </div>
                     </div>
                     <div class="cont-1">
                         <div class="card2 text-center" style="align-items: center;">
                             Jueves
-                            <input type="text" class="form-control" value="{{codorniz.jueves}}">
+                            <input type="number" class="form-control" disabled value="{{codorniz.jueves}}">
                         </div>
                         <div class="card2 text-center" style="align-items: center;">
                             Viernes
-                            <input type="text" class="form-control" value="{{codorniz.viernes}}">
+                            <input type="number" class="form-control" disabled value="{{codorniz.viernes}}">
                         </div>
                         <div class="card2 text-center" style="align-items: center;">
                             Sabado
-                            <input type="text" class="form-control" value="{{codorniz.sabado}}">
+                            <input type="number" class="form-control" disabled value="{{codorniz.sabado}}">
                         </div>
                     </div>
                     <div class="card2 text-center" style="align-items: center;">
                         Domingo
-                        <input type="text" class="form-control" value="{{codorniz.domingo}}">
+                        <input type="number" class="form-control" disabled value="{{codorniz.domingo}}">
                     </div>
                 </div>
             </div>
@@ -134,8 +134,7 @@
           <div class="columna-1-modal">
             <div class="form-group">
               <label for="">Fecha:<span style="color:red">*</span></label>
-              <input type="date" class="form-control" formControlName="fecha" [ngModel]='date | date:"yyyy-MM-dd" '
-                (ngModelChange)='date=$event' >
+              <input type="date" class="form-control" formControlName="fecha">
             </div>
             <div class="form-group">
               <label for="">Cant de codornices:
@@ -151,7 +150,7 @@
             </div>
           </div><!-- Fin columna-1 -->
             <div class="form-group">
-              <label for="" >Vermifumigaciones:</label>
+              <label for="" >Vermifumigaciones y tratamientos":</label>
               <textarea name="textarea" placeholder="vermifumigaciones y tratamientos" rows="6" cols="50" class="form-control"
               formControlName="vermifumigaciones">
             </textarea>
@@ -204,7 +203,7 @@
       
       <div class="modal-footer">
         <button  type="submit" class="btn btn-danger">
-          <i class="fas fa-plus-circle"></i> registrar
+          <i class="fas fa-plus-circle"></i> Guardar
         </button>   
   
       </div>
@@ -231,36 +230,52 @@
     </div>
   </div>  
     <div class="formulario-modal">
-      <div class="container-1-modal" style="border:solid">
-        <div class="columna-1-modal-reportes" style="border:solid"><!--columna-1 -->
+      <div class="container-1-modal" >
+        <div class="columna-1-modal-reportes"><!--columna-1 -->
           <h3>Reporte de observaciones:</h3>
           
-          <form [formGroup]="observacionesForm" (ngSubmit)="createPdf()">
+          <form [formGroup]="observacionesForm" (ngSubmit)="createPdf_observaciones()">
           <div class="form-group">
-            <label for="">Fecha:<span style="color:red">*</span></label>
+            <label for="">Desde:<span style="color:red">*</span></label>
             <input type="date" class="form-control" formControlName="fecha1" >
           </div>
           
           <div class="form-group">
-            <label for="">Fecha:<span style="color:red">*</span></label>
+            <label for="">Hasta:<span style="color:red">*</span></label>
             <input type="date" class="form-control" formControlName="fecha2">
           </div>
          
           <button  type="submit" class="btn btn-danger">
-            <i class="fas fa-plus-circle"></i> registrar
+            <i class="fas fa-plus-circle"></i> Generar PDF
           </button>
-          <button  (click)="createPdf_fechas()" class="btn btn-danger">
-            <i class="fas fa-plus-circle"></i> registrar
-          </button>
+          
         </form>
         </div><!-- Fin columna-1 -->
-         <div class="columna-1-modal" style="border:solid"><!--columna-1 -->
-          
-        </div><!-- Fin columna-1 -->
+        
                  
         </div><!-- fin container-1 -->
         <hr>
         <div class="flex-container-2-modal">
+          <div class="columna-1-modal-reportes"><!--columna-1 -->
+            <h3>Reporte de cantidad de huevos:</h3>
+            
+            <form [formGroup]="observacionesForm" (ngSubmit)="createPdf_huevos()">
+            <div class="form-group">
+              <label for="">Desde:<span style="color:red">*</span></label>
+              <input type="date" class="form-control" formControlName="fecha1" >
+            </div>
+            
+            <div class="form-group">
+              <label for="">Hasta:<span style="color:red">*</span></label>
+              <input type="date" class="form-control" formControlName="fecha2">
+            </div>
+           
+            <button  type="submit" class="btn btn-danger">
+              <i class="fas fa-plus-circle"></i> Generar PDF
+            </button>
+            
+          </form>
+          </div><!-- Fin columna-1 -->
         </div>
         
       </div> <!-- fin formulario -->

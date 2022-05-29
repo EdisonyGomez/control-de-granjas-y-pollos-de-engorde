@@ -202,3 +202,11 @@ hr {
   .card2-modal input {
     width: 60px;
   }
+
+   /* ---------------------------------------------------------- */
+
+  .columna-1-modal-reportes {
+    padding: 16px;
+    border:solid #f35b5b 1px;
+    border-radius: 3em;
+  }

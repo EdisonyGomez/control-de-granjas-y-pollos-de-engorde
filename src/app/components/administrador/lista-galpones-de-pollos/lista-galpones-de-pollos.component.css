@@ -139,4 +139,42 @@
     flex-wrap: wrap;
     margin-top: 10px;
   }
+
+  .title {
+    margin: 0px auto;
+  }
+  
+  /*---- REPORTES---- */
+    .formulario-modal-reportes {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    padding: 5px;
+    margin: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 700;
+  }
+
+  .columna-1-modal-reportes {
+    padding: 16px;
+    border:solid #f35b5b 1px;
+    border-radius: 3em;
+    margin: 10px;
+  }
+  .columna-1-modal-reportes button{
+    margin-top:10px;
+  }
+   hr {
+    height: 27vh;
+    width: .5vw;
+    border-width: 0;
+    color: #f35b5b;
+    background-color: #f35b5b;
+  }
   

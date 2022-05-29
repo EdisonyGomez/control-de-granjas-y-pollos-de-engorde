@@ -2,10 +2,17 @@
     <div class="card">
         <div class="header text-white" style="text-align: center;">
             <h1>
+              <h4 routerLink="../admin" style="float: left; cursor: pointer;  font-size: medium;" > 
+                <i class="fas fa-arrow-circle-left"></i>   
+                volver              
+              </h4> 
               Galpon de ponedoras 
               <div *ngIf="loading" class="spinner-border text-white float-end" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
+            <a class="btn btn-md btn-info" (click)="open(modalReportes)">
+              <i class="far fa-file-alt"></i> Reportes
+            </a> 
             </h1>
         </div>
         <div class="container-2" *ngFor="let gallina of gallinaList |paginate: { itemsPerPage:2, currentPage: page }">
@@ -99,7 +106,7 @@
     </div>
 </div>
 
-
+<!-- ----------------MODAL DE EDICION------------------------ -->
 <ng-template #modalGallinas let-modal>
     <div class="modal-header text-white">
       <h4 class="modal-title title" id="modal-basic-title">Editar datos
@@ -184,24 +191,87 @@
                 formControlName="observaciones">
               </textarea>
             </div>
-          </div>
-          
-        </div> <!-- fin formulario -->
-      
-      
+          </div>          
+        </div> <!-- fin formulario -->         
       <div class="modal-footer">
         <button  type="submit" class="btn btn-danger">
           <i class="fas fa-plus-circle"></i> registrar
-        </button>
-  
-  
-        <!-- <button type="reset" class="btn btn-info" 
-            (click)="resetForm(polloForm)" style="margin-top: 10px; margin-left: 3px; ">
-        <i class="fas fa-eraser"></i>Borrar selección
-    </button> -->
-  
+        </button>  
       </div>
     </form>
   </ng-template>
   <!-- --------------------------Modal para gallinas------------------------------------- -->
   
+  <!-- --------------------------Modal de Reportes  PDF------------------------------------- -->
+<ng-template #modalReportes let-modal>
+  <div class="modal-header">
+    <div class="title">
+      <h4 id="modal-basic-title">
+        <i class="far fa-file-alt"></i> Reportes de galpon
+        <div *ngIf="loading" class="spinner-border text-white float-end" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </h4>
+    </div>
+    <div class="float-end ">
+      <button type="button" class="close " aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span class="text-white" aria-hidden="true">x</span>
+      </button>
+    </div>
+  </div>  
+    <div class="formulario-modal">
+      <div class="container-1-modal" >
+        <div class="columna-1-modal-reportes"><!--columna-1 -->
+          <h3>Reporte de observaciones:</h3>
+          
+          <form [formGroup]="observacionesForm" (ngSubmit)="createPdf_observaciones()">
+          <div class="form-group">
+            <label for="">Desde:<span style="color:red">*</span></label>
+            <input type="date" class="form-control" formControlName="fecha1" >
+          </div>
+          
+          <div class="form-group">
+            <label for="">Hasta:<span style="color:red">*</span></label>
+            <input type="date" class="form-control" formControlName="fecha2">
+          </div>
+         
+          <button  type="submit" class="btn btn-danger">
+            <i class="fas fa-plus-circle"></i> Generar PDF
+          </button>
+          
+        </form>
+        </div><!-- Fin columna-1 -->
+        
+                 
+        </div><!-- fin container-1 -->
+        <hr>
+      <div class="container-1-modal" >
+        
+          <div class="columna-1-modal-reportes"><!--columna-1 -->
+            <h3>Reporte de cantidad de huevos:</h3>
+            
+            <form [formGroup]="observacionesForm" (ngSubmit)="createPdf_huevos()">
+            <div class="form-group">
+              <label for="">Desde:<span style="color:red">*</span></label>
+              <input type="date" class="form-control" formControlName="fecha1" >
+            </div>
+            
+            <div class="form-group">
+              <label for="">Hasta:<span style="color:red">*</span></label>
+              <input type="date" class="form-control" formControlName="fecha2">
+            </div>
+           
+            <button  type="submit" class="btn btn-danger">
+              <i class="fas fa-plus-circle"></i> Generar PDF
+            </button>
+            
+          </form>
+          </div><!-- Fin columna-1 -->
+        </div><!-- fin container-1 -->
+        
+        
+      </div> <!-- fin formulario -->
+    
+   
+</ng-template>
+<!-- --------------------------Modal de Reportes  PDF------------------------------------- -->

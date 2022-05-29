@@ -1,23 +1,23 @@
 export class Gallina {
     id?: string;
     fecha:Date; 
-    cantidad_ponedoras: string;
-    alimento: string;
+    cantidad_ponedoras: number;
+    alimento: number;
     vermifumigaciones: string;
-    lunes: string;
-    martes: string ;
-    miercoles:  Date;
-    jueves: string;
-    viernes: string;
-    sabado: string;
-    domingo: string;
+    lunes: number;
+    martes: number ;
+    miercoles:  number;
+    jueves: number;
+    viernes: number;
+    sabado: number;
+    domingo: number;
     observaciones: string;
 
 
-    constructor(fecha: Date, cantidad_ponedoras: string, alimento: string,
-                vermifumigaciones: string, lunes: string, martes: string, 
-                miercoles:  Date, jueves: string, viernes: string, sabado: string,
-                domingo: string, observaciones: string){
+    constructor(fecha: Date, cantidad_ponedoras: number, alimento: number,
+                vermifumigaciones: string, lunes: number, martes: number, 
+                miercoles:  number, jueves: number, viernes: number, sabado: number,
+                domingo: number, observaciones: string){
     
     this.fecha = fecha;
     this.cantidad_ponedoras = cantidad_ponedoras;
